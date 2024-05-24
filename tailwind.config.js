@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   mode: "jit",
   theme: {
     extend: {
@@ -20,11 +18,11 @@ module.exports = {
           DEFAULT: "rgba(59,60,152,0.03)",
           100: "rgba(59,60,152,0.02)",
         },
-        grey: "#747A88",
+        "grey": "#747A88",
       },
       backgroundImage: {
-        'landing-bg': "url('/blob.png')"
-      }
+        "landing-bg": "url('/blob.png')",
+      },
     },
   },
   plugins: [],
