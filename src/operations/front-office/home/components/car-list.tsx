@@ -48,7 +48,7 @@ const cars: Car[] = [
       "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
   },
 ];
-export function ListCar() {
+export function CarList() {
   return (
     <div>
       <div className="text-center mb-6">

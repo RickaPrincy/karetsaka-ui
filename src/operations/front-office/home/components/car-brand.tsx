@@ -2,13 +2,13 @@
 import { useState } from "react";
 import Image from "next/image";
 
-interface CarBrand {
+type CarBrandType = {
   id: string;
   logo: string;
   name: string;
-}
+};
 
-const staticBrands: CarBrand[] = [
+const staticBrands: CarBrandType[] = [
   {
     id: "1",
     logo: "/blob.png",
@@ -26,8 +26,8 @@ const staticBrands: CarBrand[] = [
   },
 ];
 
-export function BrandCard() {
-  const [brands] = useState<CarBrand[]>(staticBrands);
+export function CarBrand() {
+  const [brands] = useState<CarBrandType[]>(staticBrands);
 
   return (
     <div>
