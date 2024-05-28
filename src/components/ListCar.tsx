@@ -12,35 +12,40 @@ const cars: Car[] = [
     brand: "Toyota",
     model: "Corolla",
     year: 2020,
-    imageUrl: "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
+    imageUrl:
+      "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
   },
   {
     id: 2,
     brand: "Honda",
     model: "Civic",
     year: 2019,
-    imageUrl: "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
+    imageUrl:
+      "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
   },
   {
     id: 3,
     brand: "Ford",
     model: "Focus",
     year: 2018,
-    imageUrl: "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
+    imageUrl:
+      "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
   },
   {
     id: 4,
     brand: "Ford",
     model: "Focus",
     year: 2018,
-    imageUrl: "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
+    imageUrl:
+      "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
   },
   {
     id: 5,
     brand: "Ford",
     model: "Focus",
     year: 2018,
-    imageUrl: "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
+    imageUrl:
+      "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
   },
 ];
 export function ListCar() {
@@ -52,11 +57,14 @@ export function ListCar() {
       </div>
       <div className="carousel carousel-center space-x-4 rounded-box">
         {cars.map((car: Car) => (
-          <div key={car.id} className="carousel-item flex flex-col items-center">
-            <img 
-              src={car.imageUrl} 
-              alt={car.model} 
-              className="w-72 h-48 object-cover rounded-md" 
+          <div
+            key={car.id}
+            className="carousel-item flex flex-col items-center"
+          >
+            <img
+              src={car.imageUrl}
+              alt={car.model}
+              className="w-72 h-48 object-cover rounded-md"
             />
             <h2 className="text-lg font-semibold mt-2 text-center">
               {car.brand} {car.model} ({car.year})
