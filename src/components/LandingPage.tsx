@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import test from "@/assets/golf.png";
 
 export function LandingPage() {
   return (
@@ -10,7 +11,7 @@ export function LandingPage() {
       </div>
       <div className="landing__image-container">
         <div className="landing__image">
-          <Image src="/golf.png" alt="golf" fill className="object-contain" />
+          <Image src={test} alt="golf" fill className="object-contain" />
         </div>
 
         <div className="landing__image-overlay" />
