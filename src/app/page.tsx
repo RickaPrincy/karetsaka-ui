@@ -1,4 +1,4 @@
-import { BrandCard, LandingPage} from "@/components";
+import { BrandCard, LandingPage } from "@/components";
 
 export default function Home() {
   return (
