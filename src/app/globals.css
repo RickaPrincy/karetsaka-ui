@@ -44,7 +44,7 @@
 }
 
 .landing__subtitle {
-  @apply text-[27px] text-black-100 font-light mt-5;
+  @apply text-[27px]  font-light mt-5;
 }
 
 .landing__image-container {
@@ -56,4 +56,12 @@
 }
 .landing__image-overlay {
   @apply absolute xl:-top-24 xl:-right-1/2 -right-1/4 bg-landing-bg bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
+}
+
+.home__text-container {
+  @apply flex flex-col items-center justify-start gap-y-2.5;
+}
+
+.card__brand {
+  @apply bg-white rounded-md shadow-md p-4 flex items-center justify-center h-24 hover:shadow-2xl transition-shadow duration-300;
 }
