@@ -1,13 +1,25 @@
-// import { AuthProvider } from "react-admin";
+import { AuthProvider } from "react-admin";
+import authFirebase, { SigninProviderType } from "@/security/auth-firebase";
+import { securityApi } from "./api";
 
-// export const authProvider: AuthProvider = {
-//   // authentication
-//   login: (params) => Promise.resolve(/* ... */),
-//   checkError: (error) => Promise.resolve(/* ... */),
-//   checkAuth: (params) => Promise.resolve(/* ... */),
-//   logout: () => Promise.resolve(/* ... */),
-//   // getIdentity: () => Promise.resolve(/* ... */),
-//   handleCallback: () => Promise.resolve(/* ... */), // for third-party authentication only
-//   // authorization
-//   getPermissions: () => Promise.resolve(/* ... */),
-// };
+//TODO
+export const authProvider: AuthProvider = {
+  login: async (params: SigninProviderType) => {
+    await authFirebase.signIn(params);
+    return securityApi()
+      .whoami()
+      .then(() => {});
+  },
+  checkAuth: async () => {
+    return securityApi()
+      .whoami()
+      .then(() => {});
+  },
+  logout: async () => {
+    authFirebase.signOut();
+  },
+  checkError: (_error) => Promise.resolve(/* ... */),
+  // getIdentity: () => Promise.resolve(/* ... */),
+  handleCallback: () => Promise.resolve(/* ... */), // for third-party authentication only
+  getPermissions: () => Promise.resolve(/* ... */),
+};

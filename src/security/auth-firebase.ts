@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { firebaseAuth } from "../config/firebase";
 
-type SigninProviderType =
+export type SigninProviderType =
   | {
       email: string;
       password: string;
