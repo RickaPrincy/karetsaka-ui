@@ -1,11 +1,19 @@
 import { FC } from "react";
-import { Edit, SimpleForm, TextInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, email } from "react-admin";
+import { required } from "@/common/input-validator";
 
 export const UserEdit: FC = () => {
-  <Edit>
-    <SimpleForm>
-      <TextInput source="name" label="Username" />
-      <TextInput source="email" label="Email" type="email"/>
-    </SimpleForm>
-  </Edit>
+  return (
+    <Edit>
+      <SimpleForm>
+        <TextInput source="name" label="Username" validate={required()} />
+        <TextInput
+          source="email"
+          label="Email"
+          type="email"
+          validate={[required(), email()]}
+        />
+      </SimpleForm>
+    </Edit>
+  )
 };
