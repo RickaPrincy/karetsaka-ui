@@ -1,6 +1,7 @@
 import {
   CarBrand,
   LandingPage,
+  CarList,
 } from "@/operations/front-office/home/components";
 
 export default function Home() {
@@ -9,6 +10,9 @@ export default function Home() {
       <LandingPage />
       <div className="mt-12 padding-x padding-y max-width">
         <CarBrand />
+      </div>
+      <div className="mt-12 padding-x padding-y max-width">
+        <CarList />
       </div>
     </div>
   );
