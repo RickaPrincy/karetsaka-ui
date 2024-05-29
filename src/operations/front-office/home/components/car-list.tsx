@@ -1,3 +1,14 @@
+import * as React from "react";
+import {
+  ImageList,
+  ImageListItem,
+  ImageListItemBar,
+  IconButton,
+  Typography,
+  Box,
+} from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
+
 interface Car {
   id: number;
   brand: string;
@@ -48,30 +59,46 @@ const cars: Car[] = [
       "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg",
   },
 ];
+
 export function CarList() {
   return (
-    <div>
-      <div className="text-center mb-6">
-        <h1 className="text-4xl font-extrabold">Car List</h1>
-        <p>Explore our cars you might like</p>
-      </div>
-      <div className="carousel carousel-center space-x-4 rounded-box">
+    <Box sx={{ textAlign: "center", mb: 6 }}>
+      <Typography
+        variant="h2"
+        sx={{
+          fontWeight: "bold",
+          fontSize: "25px",
+        }}
+      >
+        Car List
+      </Typography>
+      <Typography sx={{ mb: 2, fontSize: "15px", color: "gray" }}>
+        Explore our cars you might like
+      </Typography>
+      <ImageList sx={{ width: "100%", height: "auto", mx: "auto" }} cols={3}>
         {cars.map((car: Car) => (
-          <div
-            key={car.id}
-            className="carousel-item flex flex-col items-center"
-          >
+          <ImageListItem key={car.id}>
             <img
-              src={car.imageUrl}
+              srcSet={`${car.imageUrl}?w=100&fit=crop&auto=format&dpr=2 2x`}
+              src={`${car.imageUrl}?w=100&fit=crop&auto=format`}
               alt={car.model}
-              className="w-72 h-48 object-cover rounded-md"
+              loading="lazy"
             />
-            <h2 className="text-lg font-semibold mt-2 text-center">
-              {car.brand} {car.model} ({car.year})
-            </h2>
-          </div>
+            <ImageListItemBar
+              title={`${car.brand} ${car.model}`}
+              subtitle={`Year: ${car.year}`}
+              actionIcon={
+                <IconButton
+                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                  aria-label={`info about ${car.brand} ${car.model}`}
+                >
+                  <InfoIcon />
+                </IconButton>
+              }
+            />
+          </ImageListItem>
         ))}
-      </div>
-    </div>
+      </ImageList>
+    </Box>
   );
 }
