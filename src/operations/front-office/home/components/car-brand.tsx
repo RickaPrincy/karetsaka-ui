@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import { Typography, Box, Grid } from "@mui/material";
 
 type CarBrandType = {
   id: string;
@@ -30,31 +31,56 @@ export function CarBrand() {
   const [brands] = useState<CarBrandType[]>(staticBrands);
 
   return (
-    <div>
-      <div className="home__text-container text-center">
-        <h1 className="text-4xl font-extrabold">Car Brands</h1>
-        <p>Explore our brands cars you might like</p>
-      </div>
+    <Box>
+      <Box sx={{ textAlign: "center", mb: 6 }}>
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: "bold",
+            fontSize: "2rem",
+          }}
+        >
+          Car Brands
+        </Typography>
+        <Typography sx={{ mb: 2, fontSize: "1rem", color: "gray" }}>
+          Explore our brands cars you might like
+        </Typography>
+      </Box>
 
-      <div className="grid grid-cols-3 gap-4">
+      <Grid container spacing={4}>
         {brands.map((brand) => (
-          <div key={brand.id} className="card__brand">
-            <div className="flex flex-row items-center">
-              <div className="flex-shrink-0">
+          <Grid item xs={12} sm={6} md={4} key={brand.id}>
+            <Box
+              sx={{
+                "display": "flex",
+                "flexDirection": "row",
+                "alignItems": "center",
+                "padding": 2,
+                "border": "1px solid #e0e0e0",
+                "borderRadius": 1,
+                "transition": "box-shadow 0.3s ease-in-out",
+                "&:hover": {
+                  boxShadow: 3,
+                },
+              }}
+            >
+              <Box sx={{ flexShrink: 0 }}>
                 <Image
                   src={brand.logo}
                   alt={brand.name}
                   width={50}
                   height={50}
                 />
-              </div>
-              <div className="ml-4">
-                <div className="text-lg font-semibold">{brand.name}</div>
-              </div>
-            </div>
-          </div>
+              </Box>
+              <Box sx={{ ml: 4 }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                  {brand.name}
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Box>
   );
 }
