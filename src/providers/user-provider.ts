@@ -1,9 +1,22 @@
+import { User } from "@/gen/client";
 import { usersApi } from "./api";
+import { KaretsakaDataProvider } from "./type";
 
-export const usersProvider = {
-  getUserById: async (userId: string) => {
+export const usersProvider: KaretsakaDataProvider<User> = {
+  getList: async (page, pageSize) => {
     return usersApi()
-      .getUserById(userId)
+      .getUsers(page, pageSize)
       .then((response) => response.data);
+  },
+  getOne: async (id) => {
+    return usersApi()
+      .getUserById(id)
+      .then((response) => response.data);
+  },
+  delete: async (id) => {
+    throw new Error("Not Implemented");
+  },
+  saveOrUpdate: async (payload, meta) => {
+    throw new Error("Not Implemented");
   },
 };

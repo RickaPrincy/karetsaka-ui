@@ -18,7 +18,6 @@ const TOOLBAR_SX: SxProps = {
   "px": "5px !important",
 };
 
-//TODO: avoir fixed width for responsive
 export const LoginForm: FC = () => {
   const login = useLogin();
 

@@ -1,5 +1,6 @@
-import { SecurityApi, UsersApi } from "../gen/client";
+import { HealthApi, SecurityApi, UsersApi } from "../gen/client";
 import { getCachedConfiguration } from "./utils";
 
+export const healthApi = () => new HealthApi(getCachedConfiguration());
 export const securityApi = () => new SecurityApi(getCachedConfiguration());
 export const usersApi = () => new UsersApi(getCachedConfiguration());

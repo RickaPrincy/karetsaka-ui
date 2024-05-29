@@ -1,4 +1,4 @@
-import { SxProps, Theme } from "@mui/material";
+import { SxProps } from "@mui/material";
 import {
   DateInputProps,
   PasswordInputProps,

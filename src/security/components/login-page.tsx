@@ -6,9 +6,11 @@ import Image from "next/image";
 
 import { FlexBox } from "@/common/components/box";
 import { PALETTE_COLORS } from "@/common/utils/palette-colors";
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "./login-form";
 import loginIllustration from "@/assets/images/login-illustration.png";
 import googleIcon from "@/assets/images/google.svg";
+
+//TODO: Loading
 
 const GOOGLE_LOGIN_SX: SxProps = {
   color: PALETTE_COLORS.black["1"],

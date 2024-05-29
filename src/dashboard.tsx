@@ -1,28 +1,19 @@
 "use client";
 
-import { Admin, Resource, ListGuesser, EditGuesser } from "react-admin";
-import jsonServerProvider from "ra-data-json-server";
-import { USER_UI } from "./operations/users";
-import { authProvider } from "./providers";
+import { Admin, ListGuesser, Resource } from "react-admin";
 import { LoginPage } from "./security/components";
-
-const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
+import { authProvider } from "./providers";
+import { dataProvider } from "./providers/data-provider";
 
 const AdminApp = () => (
   <Admin
     requireAuth
-    authProvider={authProvider}
     loginPage={LoginPage}
+    authProvider={authProvider}
     dataProvider={dataProvider}
   >
-    <Resource name="users" recordRepresentation="name" {...USER_UI} />
-    <Resource
-      name="posts"
-      list={ListGuesser}
-      edit={EditGuesser}
-      recordRepresentation="title"
-    />
-    <Resource name="comments" list={ListGuesser} edit={EditGuesser} />
+    {/* //TODO: delete before after release */}
+    <Resource name="dummy" recordRepresentation="name" list={ListGuesser} />
   </Admin>
 );
 
