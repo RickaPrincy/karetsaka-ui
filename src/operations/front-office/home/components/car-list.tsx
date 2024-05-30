@@ -1,14 +1,7 @@
 import * as React from "react";
-import {
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  IconButton,
-  Typography,
-  Box,
-} from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
+import { Typography, Box } from "@mui/material";
 
+import { CarImageList } from "./car-image-list";
 interface Car {
   id: number;
   brand: string;
@@ -62,43 +55,22 @@ const cars: Car[] = [
 
 export function CarList() {
   return (
-    <Box sx={{ textAlign: "center", mb: 6 }}>
-      <Typography
-        variant="h2"
-        sx={{
-          fontWeight: "bold",
-          fontSize: "25px",
-        }}
-      >
-        Car List
-      </Typography>
-      <Typography sx={{ mb: 2, fontSize: "15px", color: "gray" }}>
-        Explore our cars you might like
-      </Typography>
-      <ImageList sx={{ width: "100%", height: "auto", mx: "auto" }} cols={3}>
-        {cars.map((car: Car) => (
-          <ImageListItem key={car.id}>
-            <img
-              srcSet={`${car.imageUrl}?w=100&fit=crop&auto=format&dpr=2 2x`}
-              src={`${car.imageUrl}?w=100&fit=crop&auto=format`}
-              alt={car.model}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={`${car.brand} ${car.model}`}
-              subtitle={`Year: ${car.year}`}
-              actionIcon={
-                <IconButton
-                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                  aria-label={`info about ${car.brand} ${car.model}`}
-                >
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
+    <Box>
+      <Box sx={{ textAlign: "center", mb: 6 }}>
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: "bold",
+            fontSize: "2rem",
+          }}
+        >
+          Car Lists
+        </Typography>
+        <Typography sx={{ mb: 2, fontSize: "1rem", color: "gray" }}>
+          Explore our brands cars you might like
+        </Typography>
+      </Box>
+      <CarImageList cars={cars} />
     </Box>
   );
 }
