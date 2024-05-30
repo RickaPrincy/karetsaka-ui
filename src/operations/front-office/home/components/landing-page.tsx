@@ -1,6 +1,6 @@
 import Image from "next/image";
+import { CarSearch } from "../../search/components";
 import golfImage from "@/assets/images/golf.png";
-import { CarSearch } from "../../car-search/components";
 
 export function LandingPage() {
   return (

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   ImageList,
   ImageListItem,
@@ -6,17 +7,17 @@ import {
 } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 
-interface Car {
+type Car = {
   id: number;
   brand: string;
   model: string;
   year: number;
   imageUrl: string;
-}
+};
 
-interface CarImageListProps {
+type CarImageListProps = {
   cars: Car[];
-}
+};
 
 export function CarImageList({ cars }: CarImageListProps) {
   return (
@@ -32,11 +33,13 @@ export function CarImageList({ cars }: CarImageListProps) {
             "margin": "6px",
           }}
         >
-          <img
-            srcSet={`${car.imageUrl}?w=100&fit=crop&auto=format&dpr=2 2x`}
-            src={`${car.imageUrl}?w=100&fit=crop&auto=format`}
+          <Image
+            src={car.imageUrl}
             alt={car.model}
-            loading="lazy"
+            width={400}
+            height={300}
+            layout="responsive"
+            quality={100}
           />
           <ImageListItemBar
             title={`${car.brand} ${car.model}`}
