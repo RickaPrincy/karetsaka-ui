@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Typography, Box } from "@mui/material";
-
 import { CarImageList } from "./car-image-list";
+
 interface Car {
   id: number;
   brand: string;
