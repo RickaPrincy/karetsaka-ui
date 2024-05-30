@@ -3,7 +3,6 @@ import Image from "next/image";
 import golfImage from "@/assets/images/golf.png";
 import { CarImageList } from "../../home/components";
 
-
 interface Car {
   id: number;
   brand: string;
