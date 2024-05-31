@@ -1,5 +1,7 @@
 import { Typography, Box } from "@mui/material";
-import { CarImageList } from "./car-image-list";
+import Image from "next/image";
+import { CarImageList } from "../../home/components";
+import golfImage from "@/assets/images/golf.png";
 
 type Car = {
   id: number;
@@ -52,24 +54,34 @@ const cars: Car[] = [
   },
 ];
 
-export function CarList() {
+export function CarModel() {
   return (
-    <Box>
-      <Box sx={{ textAlign: "center", mb: 6 }}>
-        <Typography
-          variant="h2"
-          sx={{
-            fontWeight: "bold",
-            fontSize: "2rem",
-          }}
-        >
-          Car Lists
+    <Box sx={{ maxWidth: "1420px", margin: "0 auto" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 4,
+        }}
+      >
+        <Typography variant="h4" gutterBottom sx={{ fontSize: "20px" }}>
+          Showing 27 new BMW models. Select a model for pricing details.
         </Typography>
-        <Typography sx={{ mb: 2, fontSize: "1rem", color: "gray" }}>
-          Explore our brands cars you might like
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Image src={golfImage} alt="BMW Logo" width={100} />
+          <Typography
+            variant="h5"
+            gutterBottom
+            sx={{ fontSize: "18px", marginLeft: "16px" }}
+          >
+            BMW Models
+          </Typography>
+        </Box>
       </Box>
-      <CarImageList cars={cars} />
+      <Box sx={{ mx: "auto", width: "100%" }}>
+        <CarImageList cars={cars} />
+      </Box>
     </Box>
   );
 }
