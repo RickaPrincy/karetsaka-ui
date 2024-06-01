@@ -9,6 +9,7 @@ import { karetsakaDarkTheme, karetsakaLightTheme } from "./karetsakaTheme";
 import { ProfileShow } from "./operations/profile";
 import { USER_UI } from "./operations/users";
 import { CAR_BRAND_UI } from "./operations/car-brands";
+import { CAR_UI } from "./operations/cars";
 
 const AdminApp = () => (
   <Admin
@@ -28,6 +29,7 @@ const AdminApp = () => (
       list={<ProfileShow />}
     />
     <Resource name="users" {...USER_UI} />
+    <Resource name="cars" recordRepresentation="name" {...CAR_UI} />
     <Resource name="carBrands" {...CAR_BRAND_UI} />
   </Admin>
 );
