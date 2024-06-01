@@ -5,7 +5,7 @@ import { KaretsakaDataProvider } from "./type";
 export const usersProvider: KaretsakaDataProvider<User> = {
   getList: async (page, pageSize) => {
     return usersApi()
-      .getUsers(page, pageSize)
+      .getUsers(undefined, page, pageSize)
       .then((response) => response.data);
   },
   getOne: async (id) => {
