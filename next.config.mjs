@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*",
+        port: "",
+        pathname: "**",
+      },
+    ],
+  },
   env: {
     API_URL: process.env.API_URL,
     FIREBASE_API_KEY: process.env.FIREBASE_API_KEY,
