@@ -2,11 +2,14 @@ import { DataProvider } from "react-admin";
 import { KaretsakaDataProvider } from "./type";
 import { usersProvider } from "./user-provider";
 import { dummyProvider } from "./dummy-provider";
+import { carBrandProvider } from "./car-brand-provider";
 
 export const getProvider = (resource: string): KaretsakaDataProvider<any> => {
   switch (resource) {
     case "users":
       return usersProvider;
+    case "carBrands":
+      return carBrandProvider;
     case "dummy":
       return dummyProvider;
     default:
