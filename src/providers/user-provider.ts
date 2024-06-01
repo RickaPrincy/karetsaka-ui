@@ -3,9 +3,9 @@ import { usersApi } from "./api";
 import { KaretsakaDataProvider } from "./type";
 
 export const usersProvider: KaretsakaDataProvider<User> = {
-  getList: async (page, pageSize) => {
+  getList: async (page, pageSize, filter) => {
     return usersApi()
-      .getUsers(undefined, page, pageSize)
+      .getUsers(filter.name, page, pageSize)
       .then((response) => response.data);
   },
   getOne: async (id) => {
