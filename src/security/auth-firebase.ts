@@ -5,6 +5,9 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   UserCredential,
+  getAdditionalUserInfo,
+  deleteUser,
+  User as FirebaseUser,
 } from "firebase/auth";
 import { firebaseAuth } from "../config/firebase";
 
@@ -27,6 +30,11 @@ const cacheCredential = async (credential: UserCredential) => {
   return credential;
 };
 
+const deleteFirebaseUser = async (user: FirebaseUser) => {
+  await signOut();
+  await deleteUser(user);
+};
+
 const signIn = async (provider: SigninProviderType) => {
   if ("email" in provider) {
     const { email, password } = provider;
@@ -34,7 +42,14 @@ const signIn = async (provider: SigninProviderType) => {
       await signInWithEmailAndPassword(firebaseAuth, email, password)
     );
   }
-  return cacheCredential(await signInWithPopup(firebaseAuth, new provider()));
+  const response = await signInWithPopup(firebaseAuth, new provider());
+  const { isNewUser } = getAdditionalUserInfo(response)!;
+
+  if (isNewUser) {
+    await deleteFirebaseUser(response.user);
+    throw new Error("Unauthorized");
+  }
+  return cacheCredential(response);
 };
 
 const signup = async (provider: SigninProviderType) => {

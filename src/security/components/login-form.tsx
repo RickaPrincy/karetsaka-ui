@@ -6,11 +6,12 @@ import {
   SaveButton,
   email,
   PasswordInput,
-  useLogin,
 } from "react-admin";
 import { SxProps } from "@mui/material";
-import { required, password } from "@/common/input-validator";
+import { required } from "@/common/input-validator";
+import { useLogin } from "../hooks";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
+import { SigninProviderType } from "../auth-firebase";
 
 const TOOLBAR_SX: SxProps = {
   "width": "100%",
@@ -19,17 +20,17 @@ const TOOLBAR_SX: SxProps = {
 };
 
 export const LoginForm: FC = () => {
-  const login = useLogin();
+  const { login, isLoading } = useLogin();
 
   return (
     <SimpleForm
       sx={{ width: "100%", px: 0 }}
       onSubmit={(data) => {
-        login(data);
+        login(data as SigninProviderType, "Wrong email or password !!!");
       }}
       toolbar={
         <Toolbar sx={TOOLBAR_SX}>
-          <SaveButton fullWidth label="Login" />
+          <SaveButton disabled={isLoading} fullWidth label="Login" />
         </Toolbar>
       }
     >
@@ -42,7 +43,7 @@ export const LoginForm: FC = () => {
       <PasswordInput
         source="password"
         label="Password"
-        validate={password()}
+        validate={[required()]}
         {...COMMON_INPUT_PROPS}
       />
     </SimpleForm>
