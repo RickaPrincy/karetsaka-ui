@@ -5,7 +5,6 @@ import { GoogleAuthProvider } from "firebase/auth";
 import Image from "next/image";
 
 import { FlexBox } from "@/common/components/box";
-import { PALETTE_COLORS } from "@/common/utils/palette-colors";
 import { LoginForm } from "./login-form";
 import loginIllustration from "@/assets/images/login-illustration.png";
 import googleIcon from "@/assets/images/google.svg";
@@ -13,7 +12,6 @@ import googleIcon from "@/assets/images/google.svg";
 //TODO: Loading
 
 const GOOGLE_LOGIN_SX: SxProps = {
-  color: PALETTE_COLORS.black["1"],
   display: "flex",
   alignItems: "center",
   gap: 2,
@@ -50,14 +48,13 @@ export const LoginPage: FC = () => {
         >
           Welcome back
         </Typography>
-        <Typography
-          sx={{ mb: 2, fontSize: "15px", color: PALETTE_COLORS.gray["1"] }}
-        >
+        <Typography sx={{ mb: 2, fontSize: "15px" }} color="grey">
           Welcome back to your job !!
         </Typography>
         <Button
           size="medium"
           variant="text"
+          color="inherit"
           onClick={() => {
             login(GoogleAuthProvider);
           }}
