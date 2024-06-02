@@ -6,9 +6,7 @@ import { securityApi } from "./api";
 export const authProvider: AuthProvider = {
   login: async (params: SigninProviderType) => {
     await authFirebase.signIn(params);
-    return securityApi()
-      .whoami()
-      .then(() => {});
+    return securityApi().whoami();
   },
   checkAuth: async () => {
     return securityApi()
