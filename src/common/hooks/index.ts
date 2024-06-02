@@ -1,2 +1,2 @@
-export * from "./use-is-dark-theme"
-export * from "./use-toggle"
+export * from "./use-is-dark-theme";
+export * from "./use-toggle";
