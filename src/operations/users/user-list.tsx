@@ -15,6 +15,7 @@ import { ProfilePictureField } from "@/common/components/fields";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 import { useToggle } from "@/common/hooks";
 import { UserCreate } from "./user-create";
+import defaultProfileImage from "@/assets/images/default_image.png";
 
 export const UserList: FC = () => {
   const { value: showCreate, toggleValue: toggleShowCreate } = useToggle();
@@ -46,7 +47,11 @@ export const UserList: FC = () => {
         <Datagrid>
           <TextField source="name" label="Username" />
           <EmailField source="email" label="Email" />
-          <ProfilePictureField source="picture" label="Picture" />
+          <ProfilePictureField
+            source="picture"
+            label="Picture"
+            defaultImage={defaultProfileImage.src}
+          />
         </Datagrid>
       </List>
       <Dialog
