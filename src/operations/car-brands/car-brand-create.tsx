@@ -3,6 +3,7 @@ import { Create, SimpleForm, TextInput } from "react-admin";
 import { v4 as uuid } from "uuid";
 import { CarBrand } from "@/gen/client";
 import { required } from "@/common/input-validator";
+import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 
 export const CarBrandCreate: FC = () => {
   return (
@@ -16,8 +17,18 @@ export const CarBrandCreate: FC = () => {
       }}
     >
       <SimpleForm>
-        <TextInput source="name" label="Name" validate={required()} />
-        <TextInput source="picture" label="Picture" validate={required()} />
+        <TextInput
+          source="name"
+          label="Name"
+          validate={required()}
+          {...COMMON_INPUT_PROPS}
+        />
+        <TextInput
+          source="picture"
+          label="Picture"
+          validate={required()}
+          {...COMMON_INPUT_PROPS}
+        />
       </SimpleForm>
     </Create>
   );

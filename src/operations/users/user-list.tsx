@@ -10,7 +10,10 @@ import {
   TopToolbar,
 } from "react-admin";
 import { Dialog, DialogTitle, DialogContent } from "@mui/material";
-import { Add as CreateIcon, Warning as WarningIcon } from "@mui/icons-material";
+import {
+  AttachEmail as InviteIcon,
+  Warning as WarningIcon,
+} from "@mui/icons-material";
 import { ProfilePictureField } from "@/common/components/fields";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 import { useToggle } from "@/common/hooks";
@@ -27,11 +30,13 @@ export const UserList: FC = () => {
         actions={
           <TopToolbar>
             <Button
-              startIcon={<CreateIcon />}
-              label="Create"
+              variant="contained"
+              color="warning"
+              label="Invite new Admin"
+              startIcon={<InviteIcon />}
               onClick={toggleShowCreate}
             />
-            <ExportButton />
+            <ExportButton variant="contained" />
           </TopToolbar>
         }
         filters={[
@@ -69,7 +74,7 @@ export const UserList: FC = () => {
         }}
       >
         <DialogTitle pb={"2px !important"} fontSize="1.5rem">
-          Create amin user
+          Invite new Admin
         </DialogTitle>
         <DialogTitle py={"0 !important"} fontSize=".9rem">
           <WarningIcon color="warning" sx={{ mr: 1, mb: 1 }} />

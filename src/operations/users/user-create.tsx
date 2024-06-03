@@ -15,12 +15,12 @@ export const UserCreate: FC<{ onSubmit: () => void }> = ({ onSubmit }) => {
         setIsLoading(true);
         createUserAndSendEmail(data)
           .then(() => {
-            notify("User created !!", { type: "success" });
+            notify("Inviationt sended !!", { type: "success" });
             onSubmit();
           })
           .catch((error) => {
             console.log(error);
-            notify("An error occurred !!", { type: "error" });
+            notify("Oops, An error occurred !!", { type: "error" });
           })
           .finally(() => {
             setIsLoading(false);
