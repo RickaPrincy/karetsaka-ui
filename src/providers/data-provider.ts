@@ -3,6 +3,7 @@ import { KaretsakaDataProvider } from "./type";
 import { usersProvider } from "./user-provider";
 import { dummyProvider } from "./dummy-provider";
 import { carBrandProvider } from "./car-brand-provider";
+import { carProvider } from "./car-provider";
 
 export const getProvider = (resource: string): KaretsakaDataProvider<any> => {
   switch (resource) {
@@ -12,6 +13,8 @@ export const getProvider = (resource: string): KaretsakaDataProvider<any> => {
       return usersProvider;
     case "carBrands":
       return carBrandProvider;
+    case "cars":
+      return carProvider;
     case "dummy":
       return dummyProvider;
     default:
