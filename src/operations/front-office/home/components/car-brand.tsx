@@ -1,34 +1,14 @@
 "use client";
-import { useState } from "react";
-import Image from "next/image";
 import { Typography, Box, Grid } from "@mui/material";
-
-type CarBrandType = {
-  id: string;
-  logo: string;
-  name: string;
-};
-
-const staticBrands: CarBrandType[] = [
-  {
-    id: "1",
-    logo: "/blob.png",
-    name: "Brand One",
-  },
-  {
-    id: "2",
-    logo: "/blob.png",
-    name: "Brand Two",
-  },
-  {
-    id: "3",
-    logo: "/blob.png",
-    name: "Brand Three",
-  },
-];
+import { useQuery } from "react-query";
+import Image from "next/image";
+import { carBrandProvider } from "@/providers/car-brand-provider";
 
 export function CarBrand() {
-  const [brands] = useState<CarBrandType[]>(staticBrands);
+  const { data: carBrands = [] } = useQuery({
+    queryFn: () => carBrandProvider.getList(1, 6, {}, undefined, undefined),
+    queryKey: ["carBrands"],
+  });
 
   return (
     <Box>
@@ -48,7 +28,7 @@ export function CarBrand() {
       </Box>
 
       <Grid container spacing={4}>
-        {brands.map((brand) => (
+        {carBrands.map((brand) => (
           <Grid item xs={12} sm={6} md={4} key={brand.id}>
             <Box
               sx={{
@@ -66,7 +46,7 @@ export function CarBrand() {
             >
               <Box sx={{ flexShrink: 0 }}>
                 <Image
-                  src={brand.logo}
+                  src={brand.picture!}
                   alt={brand.name}
                   width={50}
                   height={50}
