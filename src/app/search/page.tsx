@@ -1,3 +1,6 @@
+"use client";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "../page";
 import {
   CarModel,
   CarSearch,
@@ -5,9 +8,9 @@ import {
 
 export default function Car() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <CarSearch />
       <CarModel />
-    </>
+    </QueryClientProvider>
   );
 }
