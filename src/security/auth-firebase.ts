@@ -21,12 +21,18 @@ export type SigninProviderType =
     };
 
 const AUTH_TOKEN_ID = "auth-token-id";
-const getCachedCredential = () => localStorage.getItem(AUTH_TOKEN_ID);
+const USER_ID = "user-id";
+
+const getCachedCredential = () => ({
+  token: localStorage.getItem(AUTH_TOKEN_ID),
+  id: localStorage.getItem(USER_ID),
+});
 
 const cacheCredential = async (credential: UserCredential) => {
   const user = credential?.user;
   if (!user) return credential;
   localStorage.setItem(AUTH_TOKEN_ID, await user.getIdToken());
+  localStorage.setItem(USER_ID, user.uid);
   return credential;
 };
 
