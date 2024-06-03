@@ -1,4 +1,4 @@
-import { Car } from "@/gen/client";
+import { Car, CrupdateCar } from "@/gen/client";
 import { KaretsakaDataProvider } from "./type";
 import { carsApi } from "./api";
 
@@ -20,8 +20,10 @@ export const carProvider: KaretsakaDataProvider<Car> = {
   getOne: async () => {
     throw new Error("Not implemented");
   },
-  saveOrUpdate: async () => {
-    throw new Error("Not implemented");
+  saveOrUpdate: async (car) => {
+    return carsApi()
+      .crupdateCar(car as any)
+      .then((response) => response.data);
   },
   delete: async () => {
     throw new Error("Not implemented");
