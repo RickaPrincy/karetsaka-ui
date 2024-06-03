@@ -6,6 +6,8 @@ import { carBrandProvider } from "./car-brand-provider";
 
 export const getProvider = (resource: string): KaretsakaDataProvider<any> => {
   switch (resource) {
+    case "profile":
+      return usersProvider;
     case "users":
       return usersProvider;
     case "carBrands":
