@@ -7,7 +7,7 @@ import {
   CarList,
 } from "@/operations/front-office/home/components";
 
-export const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
 export default function Home() {
   return (
