@@ -61,11 +61,9 @@ const signIn = async (provider: SigninProviderType) => {
 const signup = async (provider: SigninProviderType) => {
   if ("email" in provider) {
     const { email, password } = provider;
-    return cacheCredential(
-      await createUserWithEmailAndPassword(firebaseAuth, email, password)
-    );
+    return await createUserWithEmailAndPassword(firebaseAuth, email, password);
   }
-  return cacheCredential(await signIn(provider));
+  return await signIn(provider);
 };
 
 const signOut = async () => {

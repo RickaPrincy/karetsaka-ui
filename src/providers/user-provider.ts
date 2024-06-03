@@ -1,6 +1,31 @@
+import * as PASSWORD_GENERATOR from "generate-password-browser";
 import { User } from "@/gen/client";
-import { usersApi } from "./api";
 import { KaretsakaDataProvider } from "./type";
+import { EmailType, emailProvider } from "./email-provider";
+import { usersApi } from "./api";
+import authFirebase from "@/security/auth-firebase";
+
+export const createUserAndSendEmail = async ({ email }: { email: string }) => {
+  const GENERATED_PASSWORD = PASSWORD_GENERATOR.generate({
+    numbers: true,
+    lowercase: true,
+    uppercase: true,
+    length: 25,
+  });
+
+  await authFirebase.signup({
+    email,
+    password: GENERATED_PASSWORD,
+  });
+
+  return emailProvider.send({
+    type: EmailType.AUTHENTICATION,
+    data: {
+      destination_email: email,
+      temporary_password: GENERATED_PASSWORD,
+    },
+  });
+};
 
 export const usersProvider: KaretsakaDataProvider<User> = {
   getList: async (page, pageSize, filter) => {
@@ -13,10 +38,10 @@ export const usersProvider: KaretsakaDataProvider<User> = {
       .getUserById(id)
       .then((response) => response.data);
   },
-  delete: async (id) => {
+  delete: async () => {
     throw new Error("Not Implemented");
   },
-  saveOrUpdate: async (payload, meta) => {
+  saveOrUpdate: async () => {
     throw new Error("Not Implemented");
   },
 };

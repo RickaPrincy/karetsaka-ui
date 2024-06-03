@@ -71,7 +71,7 @@ export const UserList: FC = () => {
           An Email will be send to the email with authentification information
         </DialogTitle>
         <DialogContent>
-          <UserCreate />
+          <UserCreate onSubmit={toggleShowCreate} />
         </DialogContent>
       </Dialog>
     </>
