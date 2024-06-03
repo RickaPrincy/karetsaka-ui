@@ -1,15 +1,16 @@
 import { FC } from "react";
 import { FunctionField, FunctionFieldProps } from "react-admin";
 
-export const ProfilePictureField: FC<Omit<FunctionFieldProps, "render">> = ({
-  source = "picture",
-  ...functionFieldProps
-}) => (
+export const ProfilePictureField: FC<
+  Omit<FunctionFieldProps, "render"> & {
+    defaultImage?: string;
+  }
+> = ({ source = "picture", defaultImage, ...functionFieldProps }) => (
   <FunctionField
     render={(record: any) => {
       return (
         <img
-          src={record[source]}
+          src={record[source] || defaultImage}
           style={{
             width: "45px",
             height: "45px",

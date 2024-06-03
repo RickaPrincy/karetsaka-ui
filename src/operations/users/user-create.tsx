@@ -1,19 +1,38 @@
-import { FC } from "react";
-import { Create, SimpleForm, TextInput, email } from "react-admin";
+import { FC, useState } from "react";
+import { SimpleForm, TextInput, email, useNotify } from "react-admin";
 import { required } from "@/common/input-validator";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
+import { createUserAndSendEmail } from "@/providers";
 
-export const UserCreate: FC = () => {
+export const UserCreate: FC<{ onSubmit: () => void }> = ({ onSubmit }) => {
+  const notify = useNotify();
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
-    <Create title=" ">
-      <SimpleForm>
-        <TextInput
-          source="email"
-          label="Email"
-          validate={[required(), email()]}
-          {...COMMON_INPUT_PROPS}
-        />
-      </SimpleForm>
-    </Create>
+    <SimpleForm
+      disabled={isLoading}
+      onSubmit={(data: any) => {
+        setIsLoading(true);
+        createUserAndSendEmail(data)
+          .then(() => {
+            notify("Inviationt sended !!", { type: "success" });
+            onSubmit();
+          })
+          .catch((error) => {
+            console.log(error);
+            notify("Oops, An error occurred !!", { type: "error" });
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+      }}
+    >
+      <TextInput
+        source="email"
+        label="Email"
+        validate={[required(), email()]}
+        {...COMMON_INPUT_PROPS}
+      />
+    </SimpleForm>
   );
 };

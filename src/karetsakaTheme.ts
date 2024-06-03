@@ -24,6 +24,13 @@ export const commonComponentsTheme: Partial<RaThemeOptions["components"]> = {
       },
     },
   },
+  MuiButton: {
+    styleOverrides: {
+      root: {
+        paddingTop: 6,
+      },
+    },
+  },
 };
 
 export const karetsakaLightTheme: RaThemeOptions = {
