@@ -61,6 +61,61 @@ export interface ApiResponseError {
 /**
  *
  * @export
+ * @interface Appointment
+ */
+export interface Appointment {
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  id: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  name: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  firstName: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  email: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  message: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  contact: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  appointmentDate: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Appointment
+   */
+  status: string;
+}
+/**
+ *
+ * @export
  * @interface Car
  */
 export interface Car {
@@ -359,6 +414,424 @@ export interface User {
 }
 
 /**
+ * AppointmentsApi - axios parameter creator
+ * @export
+ */
+export const AppointmentsApiAxiosParamCreator = function (
+  configuration?: Configuration
+) {
+  return {
+    /**
+     *
+     * @summary
+     * @param {Appointment} appointment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateAppointments: async (
+      appointment: Appointment,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'appointment' is not null or undefined
+      assertParamExists("crupdateAppointments", "appointment", appointment);
+      const localVarPath = `/appointments`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        appointment,
+        localVarRequestOptions,
+        configuration
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAppointmentById: async (
+      id: string,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("getAppointmentById", "id", id);
+      const localVarPath = `/appointment/{id}`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} [status]
+     * @param {string} [name]
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAppointments: async (
+      status?: string,
+      name?: string,
+      page?: any,
+      pageSize?: any,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      const localVarPath = `/appointments`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearer required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      if (status !== undefined) {
+        localVarQueryParameter["status"] = status;
+      }
+
+      if (name !== undefined) {
+        localVarQueryParameter["name"] = name;
+      }
+
+      if (page !== undefined) {
+        for (const [key, value] of Object.entries(page)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
+
+      if (pageSize !== undefined) {
+        for (const [key, value] of Object.entries(pageSize)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * AppointmentsApi - functional programming interface
+ * @export
+ */
+export const AppointmentsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    AppointmentsApiAxiosParamCreator(configuration);
+  return {
+    /**
+     *
+     * @summary
+     * @param {Appointment} appointment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async crupdateAppointments(
+      appointment: Appointment,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Appointment>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.crupdateAppointments(
+          appointment,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["AppointmentsApi.crupdateAppointments"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getAppointmentById(
+      id: string,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Appointment>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getAppointmentById(id, options);
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["AppointmentsApi.getAppointmentById"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} [status]
+     * @param {string} [name]
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getAppointments(
+      status?: string,
+      name?: string,
+      page?: any,
+      pageSize?: any,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string
+      ) => AxiosPromise<Array<Appointment>>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getAppointments(
+        status,
+        name,
+        page,
+        pageSize,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["AppointmentsApi.getAppointments"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
+};
+
+/**
+ * AppointmentsApi - factory interface
+ * @export
+ */
+export const AppointmentsApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance
+) {
+  const localVarFp = AppointmentsApiFp(configuration);
+  return {
+    /**
+     *
+     * @summary
+     * @param {Appointment} appointment
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    crupdateAppointments(
+      appointment: Appointment,
+      options?: any
+    ): AxiosPromise<Appointment> {
+      return localVarFp
+        .crupdateAppointments(appointment, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAppointmentById(id: string, options?: any): AxiosPromise<Appointment> {
+      return localVarFp
+        .getAppointmentById(id, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} [status]
+     * @param {string} [name]
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getAppointments(
+      status?: string,
+      name?: string,
+      page?: any,
+      pageSize?: any,
+      options?: any
+    ): AxiosPromise<Array<Appointment>> {
+      return localVarFp
+        .getAppointments(status, name, page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
+};
+
+/**
+ * AppointmentsApi - object-oriented interface
+ * @export
+ * @class AppointmentsApi
+ * @extends {BaseAPI}
+ */
+export class AppointmentsApi extends BaseAPI {
+  /**
+   *
+   * @summary
+   * @param {Appointment} appointment
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AppointmentsApi
+   */
+  public crupdateAppointments(
+    appointment: Appointment,
+    options?: RawAxiosRequestConfig
+  ) {
+    return AppointmentsApiFp(this.configuration)
+      .crupdateAppointments(appointment, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} id
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AppointmentsApi
+   */
+  public getAppointmentById(id: string, options?: RawAxiosRequestConfig) {
+    return AppointmentsApiFp(this.configuration)
+      .getAppointmentById(id, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} [status]
+   * @param {string} [name]
+   * @param {any} [page]
+   * @param {any} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AppointmentsApi
+   */
+  public getAppointments(
+    status?: string,
+    name?: string,
+    page?: any,
+    pageSize?: any,
+    options?: RawAxiosRequestConfig
+  ) {
+    return AppointmentsApiFp(this.configuration)
+      .getAppointments(status, name, page, pageSize, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+}
+
+/**
  * CarsApi - axios parameter creator
  * @export
  */
@@ -508,6 +981,68 @@ export const CarsApiAxiosParamCreator = function (
       if (name !== undefined) {
         localVarQueryParameter["name"] = name;
       }
+
+      if (page !== undefined) {
+        for (const [key, value] of Object.entries(page)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
+
+      if (pageSize !== undefined) {
+        for (const [key, value] of Object.entries(pageSize)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getCarBrandsById: async (
+      id: string,
+      page?: any,
+      pageSize?: any,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("getCarBrandsById", "id", id);
+      const localVarPath = `/cars/brands/{id}`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "GET",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
       if (page !== undefined) {
         for (const [key, value] of Object.entries(page)) {
@@ -783,6 +1318,43 @@ export const CarsApiFp = function (configuration?: Configuration) {
      *
      * @summary
      * @param {string} id
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getCarBrandsById(
+      id: string,
+      page?: any,
+      pageSize?: any,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CarBrand>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getCarBrandsById(
+          id,
+          page,
+          pageSize,
+          options
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["CarsApi.getCarBrandsById"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -922,6 +1494,25 @@ export const CarsApiFactory = function (
      *
      * @summary
      * @param {string} id
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getCarBrandsById(
+      id: string,
+      page?: any,
+      pageSize?: any,
+      options?: any
+    ): AxiosPromise<CarBrand> {
+      return localVarFp
+        .getCarBrandsById(id, page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -1038,6 +1629,27 @@ export class CarsApi extends BaseAPI {
    *
    * @summary
    * @param {string} id
+   * @param {any} [page]
+   * @param {any} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CarsApi
+   */
+  public getCarBrandsById(
+    id: string,
+    page?: any,
+    pageSize?: any,
+    options?: RawAxiosRequestConfig
+  ) {
+    return CarsApiFp(this.configuration)
+      .getCarBrandsById(id, page, pageSize, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} id
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CarsApi
@@ -1112,89 +1724,6 @@ export const DefaultApiAxiosParamCreator = function (
   return {
     /**
      *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    appointmentsControllerFindAll: async (
-      options: RawAxiosRequestConfig = {}
-    ): Promise<RequestArgs> => {
-      const localVarPath = `/appointments`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = {
-        method: "GET",
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     *
-     * @param {string} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    appointmentsControllerFindById: async (
-      id: string,
-      options: RawAxiosRequestConfig = {}
-    ): Promise<RequestArgs> => {
-      // verify required parameter 'id' is not null or undefined
-      assertParamExists("appointmentsControllerFindById", "id", id);
-      const localVarPath = `/appointments/{id}`.replace(
-        `{${"id"}}`,
-        encodeURIComponent(String(id))
-      );
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = {
-        method: "GET",
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     *
      * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
@@ -1219,45 +1748,6 @@ export const DefaultApiAxiosParamCreator = function (
 
       const localVarRequestOptions = {
         method: "GET",
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
-    /**
-     *
-     * @summary
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    getImages: async (
-      options: RawAxiosRequestConfig = {}
-    ): Promise<RequestArgs> => {
-      const localVarPath = `/images`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = {
-        method: "PUT",
         ...baseOptions,
         ...options,
       };
@@ -1327,61 +1817,6 @@ export const DefaultApiFp = function (configuration?: Configuration) {
   return {
     /**
      *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async appointmentsControllerFindAll(
-      options?: RawAxiosRequestConfig
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-    > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.appointmentsControllerFindAll(options);
-      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-      const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.appointmentsControllerFindAll"]?.[
-          localVarOperationServerIndex
-        ]?.url;
-      return (axios, basePath) =>
-        createRequestFunction(
-          localVarAxiosArgs,
-          globalAxios,
-          BASE_PATH,
-          configuration
-        )(axios, localVarOperationServerBasePath || basePath);
-    },
-    /**
-     *
-     * @param {string} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async appointmentsControllerFindById(
-      id: string,
-      options?: RawAxiosRequestConfig
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>
-    > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.appointmentsControllerFindById(
-          id,
-          options
-        );
-      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-      const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.appointmentsControllerFindById"]?.[
-          localVarOperationServerIndex
-        ]?.url;
-      return (axios, basePath) =>
-        createRequestFunction(
-          localVarAxiosArgs,
-          globalAxios,
-          BASE_PATH,
-          configuration
-        )(axios, localVarOperationServerBasePath || basePath);
-    },
-    /**
-     *
      * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
@@ -1401,32 +1836,6 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarOperationServerBasePath =
         operationServerMap["DefaultApi.get"]?.[localVarOperationServerIndex]
           ?.url;
-      return (axios, basePath) =>
-        createRequestFunction(
-          localVarAxiosArgs,
-          globalAxios,
-          BASE_PATH,
-          configuration
-        )(axios, localVarOperationServerBasePath || basePath);
-    },
-    /**
-     *
-     * @summary
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async getImages(
-      options?: RawAxiosRequestConfig
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Image>>
-    > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.getImages(options);
-      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-      const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.getImages"]?.[
-          localVarOperationServerIndex
-        ]?.url;
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -1475,30 +1884,6 @@ export const DefaultApiFactory = function (
   return {
     /**
      *
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    appointmentsControllerFindAll(options?: any): AxiosPromise<void> {
-      return localVarFp
-        .appointmentsControllerFindAll(options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     *
-     * @param {string} id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    appointmentsControllerFindById(
-      id: string,
-      options?: any
-    ): AxiosPromise<void> {
-      return localVarFp
-        .appointmentsControllerFindById(id, options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     *
      * @summary
      * @param {string} id
      * @param {*} [options] Override http request option.
@@ -1507,17 +1892,6 @@ export const DefaultApiFactory = function (
     get(id: string, options?: any): AxiosPromise<Image> {
       return localVarFp
         .get(id, options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     *
-     * @summary
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    getImages(options?: any): AxiosPromise<Array<Image>> {
-      return localVarFp
-        .getImages(options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -1543,34 +1917,6 @@ export const DefaultApiFactory = function (
 export class DefaultApi extends BaseAPI {
   /**
    *
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof DefaultApi
-   */
-  public appointmentsControllerFindAll(options?: RawAxiosRequestConfig) {
-    return DefaultApiFp(this.configuration)
-      .appointmentsControllerFindAll(options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   *
-   * @param {string} id
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof DefaultApi
-   */
-  public appointmentsControllerFindById(
-    id: string,
-    options?: RawAxiosRequestConfig
-  ) {
-    return DefaultApiFp(this.configuration)
-      .appointmentsControllerFindById(id, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   *
    * @summary
    * @param {string} id
    * @param {*} [options] Override http request option.
@@ -1580,19 +1926,6 @@ export class DefaultApi extends BaseAPI {
   public get(id: string, options?: RawAxiosRequestConfig) {
     return DefaultApiFp(this.configuration)
       .get(id, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   *
-   * @summary
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof DefaultApi
-   */
-  public getImages(options?: RawAxiosRequestConfig) {
-    return DefaultApiFp(this.configuration)
-      .getImages(options)
       .then((request) => request(this.axios, this.basePath));
   }
 
