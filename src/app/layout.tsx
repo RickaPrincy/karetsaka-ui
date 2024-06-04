@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ResponsiveAppBar } from "@/operations/front-office/components";
 
 export const metadata: Metadata = {
   title: "Karetsaka",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ResponsiveAppBar />
+        {children}
+      </body>
     </html>
   );
 }
