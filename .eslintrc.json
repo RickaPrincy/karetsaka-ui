@@ -5,6 +5,8 @@
     "prefer-const": ["error", { "destructuring": "all" }],
     "quote-props": ["error", "as-needed", { "unnecessary": false }],
     "prefer-arrow-callback": "off",
-    "react/prop-types": ["error", { "ignore": ["prop2"] }]
+    "react/prop-types": ["error", { "ignore": ["prop2"] }],
+    "react/no-unescaped-entities": "off", 
+    "no-useless-escape": "off"
   }
 }
