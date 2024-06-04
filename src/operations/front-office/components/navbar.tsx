@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import * as React from "react";
 import {
   AppBar,
@@ -13,8 +13,7 @@ import {
   Tooltip,
   MenuItem,
 } from "@mui/material";
-import   { Menu as MenuIcon ,Adb as AdbIcon }  from "@mui/icons-material";
-
+import { Menu as MenuIcon, Adb as AdbIcon } from "@mui/icons-material";
 
 const pages = ["Brand", "Car", "Appointement"];
 const settings = ["Dashboard"];
@@ -43,7 +42,7 @@ export function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static"  sx={{ backgroundColor: "#4DBCE7" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#4DBCE7" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
