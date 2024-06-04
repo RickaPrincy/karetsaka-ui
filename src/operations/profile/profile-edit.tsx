@@ -11,7 +11,7 @@ export const ProfileEdit: FC = () => {
       id={id!}
       resource="profile"
       title="Edit profile"
-      redirect="show"
+      redirect="/"
       transform={(profile): UpdateProfile => {
         return {
           id,
