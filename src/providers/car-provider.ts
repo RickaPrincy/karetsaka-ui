@@ -17,8 +17,10 @@ export const carProvider: KaretsakaDataProvider<Car> = {
       )
       .then((response) => response.data);
   },
-  getOne: async () => {
-    throw new Error("Not implemented");
+  getOne: async (id) => {
+    return carsApi()
+      .getCarById(id)
+      .then((response) => response.data);
   },
   saveOrUpdate: async (car) => {
     return carsApi()
