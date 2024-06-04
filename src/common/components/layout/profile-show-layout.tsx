@@ -3,7 +3,7 @@ import { Show, ShowProps, SimpleShowLayout, TextField } from "react-admin";
 import { ProfilePictureField } from "../fields";
 import defaultProfileImage from "@/assets/images/default_image.png";
 
-export const ProfileLayout: FC<Omit<ShowProps, "children">> = (props) => {
+export const ProfileShowLayout: FC<Omit<ShowProps, "children">> = (props) => {
   return (
     <Show {...props}>
       <SimpleShowLayout>

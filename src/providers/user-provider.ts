@@ -41,7 +41,16 @@ export const usersProvider: KaretsakaDataProvider<User> = {
   delete: async () => {
     throw new Error("Not Implemented");
   },
-  saveOrUpdate: async () => {
-    throw new Error("Not Implemented");
+  saveOrUpdate: async (payload, meta) => {
+    if (meta.mutationType === "CREATE") {
+      throw new Error("Not Implemented");
+    }
+
+    return usersApi()
+      .updateProfile({
+        name: payload.name,
+        picture: payload.picture,
+      })
+      .then((response) => response.data);
   },
 };

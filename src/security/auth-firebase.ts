@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   UserCredential,
   getAdditionalUserInfo,
+  sendPasswordResetEmail,
   deleteUser,
   User as FirebaseUser,
 } from "firebase/auth";
@@ -71,10 +72,15 @@ const signOut = async () => {
   localStorage.removeItem(AUTH_TOKEN_ID);
 };
 
+const resetPassword = async (email: string) => {
+  return sendPasswordResetEmail(firebaseAuth, email);
+};
+
 const authFirebase = {
   signIn,
   signOut,
   signup,
+  resetPassword,
   cacheCredential,
   getCachedCredential,
 };

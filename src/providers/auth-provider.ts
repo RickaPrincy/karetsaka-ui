@@ -14,6 +14,8 @@ export const authProvider: AuthProvider = {
       .then(() => {});
   },
   logout: async () => {
+    localStorage.clear();
+    sessionStorage.clear();
     authFirebase.signOut();
   },
   checkError: (_error) => Promise.resolve(/* ... */),
