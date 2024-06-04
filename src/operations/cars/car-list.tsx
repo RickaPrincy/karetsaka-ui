@@ -6,7 +6,7 @@ import { Car } from "@/gen/client";
 //TODO: create car card components
 export const CarList: FC = () => {
   return (
-    <List title="cars" empty={false}>
+    <List title="Cars" empty={false}>
       <Datagrid bulkActionButtons={false}>
         <FunctionField render={(car: Car) => <CarCard car={car} />} />
       </Datagrid>

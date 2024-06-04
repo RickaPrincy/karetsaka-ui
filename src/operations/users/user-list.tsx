@@ -49,7 +49,7 @@ export const UserList: FC = () => {
           />,
         ]}
       >
-        <Datagrid>
+        <Datagrid rowClick="show">
           <TextField source="name" label="Username" />
           <EmailField source="email" label="Email" />
           <ProfilePictureField
