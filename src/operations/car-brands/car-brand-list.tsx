@@ -9,7 +9,7 @@ export const CarBrandList: FC = () => {
     <List
       hasCreate
       empty={false}
-      title="Car Brands"
+      title="Brands"
       filters={[
         <TextInput alwaysOn key="name" source="name" {...COMMON_INPUT_PROPS} />,
       ]}
