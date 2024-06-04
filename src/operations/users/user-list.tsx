@@ -15,9 +15,9 @@ import {
   Warning as WarningIcon,
 } from "@mui/icons-material";
 import { ProfilePictureField } from "@/common/components/fields";
+import { UserCreate } from "./user-create";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 import { useToggle } from "@/common/hooks";
-import { UserCreate } from "./user-create";
 import defaultProfileImage from "@/assets/images/default_image.png";
 
 export const UserList: FC = () => {
@@ -45,7 +45,7 @@ export const UserList: FC = () => {
             alwaysOn
             key="name"
             source="name"
-            label="Username"
+            label="Name"
           />,
         ]}
       >
