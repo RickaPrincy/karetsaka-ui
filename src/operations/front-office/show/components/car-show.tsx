@@ -24,15 +24,14 @@ import Image from "next/image";
 import golfImage from "@/assets/images/golf.png";
 import login from "@/assets/images/login-illustration.png";
 import { carProvider } from "@/providers/car-provider";
+import { AppointmentForm } from "../../appointment/components";
 
 const images = [golfImage, login];
 
 export const CarShow = () => {
-  /* const { data: carShow = [] } = useQuery({
-    queryFn: () => carProvider.getOne("BMW", "BMW X5"),
-    queryKey: ["carShow"],
-  });*/
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAppointmentFormOpen, setAppointmentFormOpen] = useState(false);
+
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
@@ -43,6 +42,14 @@ export const CarShow = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
+  };
+
+  const handleOpenAppointmentForm = () => {
+    setAppointmentFormOpen(true);
+  };
+
+  const handleCloseAppointmentForm = () => {
+    setAppointmentFormOpen(false);
   };
 
   return (
@@ -124,7 +131,11 @@ export const CarShow = () => {
             </Typography>
             <Typography variant="body1" gutterBottom>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Button variant="contained" startIcon={<ShoppingCartIcon />}>
+                <Button
+                  variant="contained"
+                  startIcon={<ShoppingCartIcon />}
+                  onClick={handleOpenAppointmentForm}
+                >
                   Appointment
                 </Button>
               </Box>
@@ -215,6 +226,11 @@ export const CarShow = () => {
           </Box>
         </Grid>
       </Grid>
+
+      <AppointmentForm
+        open={isAppointmentFormOpen}
+        onClose={handleCloseAppointmentForm}
+      />
     </Box>
   );
 };
