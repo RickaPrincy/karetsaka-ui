@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 import { Typography, Box, Grid } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 
 type CarBrandType = {
   id: string;
@@ -50,34 +51,36 @@ export function CarBrand() {
       <Grid container spacing={4}>
         {brands.map((brand) => (
           <Grid item xs={12} sm={6} md={4} key={brand.id}>
-            <Box
-              sx={{
-                "display": "flex",
-                "flexDirection": "row",
-                "alignItems": "center",
-                "padding": 2,
-                "border": "1px solid #e0e0e0",
-                "borderRadius": 1,
-                "transition": "box-shadow 0.3s ease-in-out",
-                "&:hover": {
-                  boxShadow: 3,
-                },
-              }}
-            >
-              <Box sx={{ flexShrink: 0 }}>
-                <Image
-                  src={brand.logo}
-                  alt={brand.name}
-                  width={50}
-                  height={50}
-                />
+            <Link href={`/search`} passHref>
+              <Box
+                sx={{
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "alignItems": "center",
+                  "padding": 2,
+                  "border": "1px solid #e0e0e0",
+                  "borderRadius": 1,
+                  "transition": "box-shadow 0.3s ease-in-out",
+                  "&:hover": {
+                    boxShadow: 3,
+                  },
+                }}
+              >
+                <Box sx={{ flexShrink: 0 }}>
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    width={50}
+                    height={50}
+                  />
+                </Box>
+                <Box sx={{ ml: 4 }}>
+                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                    {brand.name}
+                  </Typography>
+                </Box>
               </Box>
-              <Box sx={{ ml: 4 }}>
-                <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-                  {brand.name}
-                </Typography>
-              </Box>
-            </Box>
+            </Link>
           </Grid>
         ))}
       </Grid>
