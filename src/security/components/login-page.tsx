@@ -17,7 +17,8 @@ export const LoginPage: FC = () => {
           src={loginIllustration}
           style={{
             display: "block",
-            maxWidth: "500px",
+            maxWidth: "400px",
+            height: "auto",
             width: "100%",
           }}
         />

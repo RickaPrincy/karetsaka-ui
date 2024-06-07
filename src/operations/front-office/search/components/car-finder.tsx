@@ -95,8 +95,6 @@ export const CarFinder: React.FC = () => {
   const [motorType, setMotorType] = useState("");
   const [priceRange, setPriceRange] = useState([0, 50000]);
 
-  const theme = useTheme();
-
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setType(event.target.value);
   };

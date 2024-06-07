@@ -1,48 +1,57 @@
 "use client";
-import * as React from "react";
-import { AppBar, Container, Box, Toolbar, Button } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
 
-const pages = [
-  { label: "Brand", href: "/brand" },
-  { label: "Car", href: "/car" },
-  { label: "Appointment", href: "/appointment" },
-];
+import * as React from "react";
+import Link from "next/link";
+import { AppBar, Typography, Button } from "@mui/material";
+import { PALETTE_COLORS } from "@/common/utils/palette-colors";
+import { FlexBox } from "@/common/components/box";
 
 export function ResponsiveAppBar() {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#4DBCE7" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
-            <Image src="/logo.png" alt="Logo" width={100} height={100} />
-          </Box>
-
-          <Box
-            sx={{
-              flexGrow: 1,
-              justifyContent: "center",
-              display: { xs: "none", md: "flex" },
+    <AppBar
+      position="fixed"
+      sx={{
+        bgcolor: "none",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "row",
+        px: 4,
+        py: 2,
+        backgroundColor: "transparent",
+        boxShadow: "none",
+        justifyContent: "space-between",
+      }}
+    >
+      <Link href="#">
+        <Typography variant="h1" sx={{ fontSize: "25px" }}>
+          <span
+            style={{
+              color: PALETTE_COLORS.orange["1"],
+              fontSize: "30px",
+              fontWeight: "bold",
             }}
           >
-            {pages.map((page) => (
-              <Link key={page.label} href={page.href} passHref>
-                <Button sx={{ my: 2, color: "white", display: "block" }}>
-                  {page.label}
-                </Button>
-              </Link>
-            ))}
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Link href="/admin" passHref>
-              <Button variant="contained" color="primary">
-                Login
-              </Button>
-            </Link>
-          </Box>
-        </Toolbar>
-      </Container>
+            K
+          </span>
+          aretsaka
+        </Typography>
+      </Link>
+      <FlexBox
+        sx={{
+          "gap": 4,
+          "a:hover": {
+            color: PALETTE_COLORS.orange["1"],
+          },
+        }}
+      >
+        <Link href="/cars">Cars</Link>
+        <Link href="/contact">Contact Us</Link>
+        <Link href="/about">About</Link>
+      </FlexBox>
+      <Button href="/admin" variant="contained" color="warning">
+        Login
+      </Button>
     </AppBar>
   );
 }
