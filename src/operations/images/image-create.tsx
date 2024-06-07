@@ -8,6 +8,7 @@ import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 export const ImageCreate: FC = () => {
   return (
     <Create
+      redirect="show"
       title="Create Image"
       transform={(imageToCreate: Omit<Image, "id">): Image => {
         return {
@@ -18,14 +19,15 @@ export const ImageCreate: FC = () => {
     >
       <SimpleForm>
         <TextInput
-          source="url"
-          label="Url"
+          source="name"
+          label="Name"
           validate={required()}
           {...COMMON_INPUT_PROPS}
         />
         <TextInput
-          source="productId"
-          label="Product ID"
+          source="url"
+          label="Url"
+          validate={required()}
           {...COMMON_INPUT_PROPS}
         />
       </SimpleForm>
