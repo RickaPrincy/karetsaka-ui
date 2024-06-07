@@ -1,2 +1,2 @@
 export * from "./car-search";
-export * from "./car-model";
+export * from "./car-finder";
