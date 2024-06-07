@@ -2,18 +2,13 @@
 import { useState } from "react";
 import { TextField, Container, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import Link from "next/link";
 
 export function CarSearch() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      performSearch();
-    }
   };
 
   const performSearch = () => {
@@ -26,12 +21,13 @@ export function CarSearch() {
         label="Search by Car Brand or Model"
         value={searchTerm}
         onChange={handleSearch}
-        onKeyDown={handleKeyDown}
         fullWidth
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon />
+              <Link href={`/client/search`} passHref>
+                <SearchIcon onClick={performSearch} />
+              </Link>
             </InputAdornment>
           ),
         }}
