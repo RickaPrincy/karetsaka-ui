@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Datagrid, EditButton, TextField, TextInput } from "react-admin";
-import { ProfilePictureField } from "@/common/components/fields";
+import { PictureField } from "@/common/components/fields";
 import { List } from "@/common/components/list";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 
-//TODO: rename ProfilePictureFIeld
+//TODO: rename PictureField
 export const CarBrandList: FC = () => {
   return (
     <List
@@ -16,7 +16,7 @@ export const CarBrandList: FC = () => {
     >
       <Datagrid rowClick="show">
         <TextField source="name" label="Name" />
-        <ProfilePictureField source="picture" label="Picture" />
+        <PictureField source="picture" label="Picture" />
         <EditButton color="warning" />
       </Datagrid>
     </List>
