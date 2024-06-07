@@ -13,7 +13,7 @@ import {
   AttachEmail as InviteIcon,
   Warning as WarningIcon,
 } from "@mui/icons-material";
-import { ProfilePictureField } from "@/common/components/fields";
+import { PictureField } from "@/common/components/fields";
 import { List } from "@/common/components/list";
 import { UserCreate } from "./user-create";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
@@ -52,7 +52,7 @@ export const UserList: FC = () => {
         <Datagrid rowClick="show">
           <TextField source="name" label="Username" />
           <EmailField source="email" label="Email" />
-          <ProfilePictureField
+          <PictureField
             source="picture"
             label="Picture"
             defaultImage={defaultProfileImage.src}

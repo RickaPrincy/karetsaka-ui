@@ -1,1 +1,1 @@
-export * from "./profile-picture-field";
+export * from "./picture-field";
