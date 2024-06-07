@@ -1,4 +1,3 @@
-import { PictureField } from "@/common/components/fields";
 import { FC } from "react";
 import {
   EditButton,
@@ -8,6 +7,7 @@ import {
   TopToolbar,
 } from "react-admin";
 import { useParams } from "react-router-dom";
+import { PictureField } from "@/common/components/fields";
 
 export const ImageShow: FC = () => {
   const { id } = useParams();
@@ -22,8 +22,17 @@ export const ImageShow: FC = () => {
       }
     >
       <SimpleShowLayout>
-        <PictureField source="url" />
-        <TextField label="Name" source="name" />
+        <TextField source="name" label="Name" />
+        <PictureField
+          source="url"
+          imageProps={{
+            style: {
+              borderRadius: 0,
+              width: "100px",
+              height: "100px",
+            },
+          }}
+        />
       </SimpleShowLayout>
     </Show>
   );

@@ -13,6 +13,7 @@ import { dataProvider } from "./providers/data-provider";
 import { USER_UI } from "./operations/users";
 import { CAR_BRAND_UI } from "./operations/car-brands";
 import { CAR_UI } from "./operations/cars";
+import { IMAGE_UI } from "./operations/images";
 
 const AdminApp = () => (
   <Admin
@@ -30,6 +31,7 @@ const AdminApp = () => (
     <Resource name="users" {...USER_UI} />
     <Resource name="cars" {...CAR_UI} />
     <Resource name="carBrands" {...CAR_BRAND_UI} />
+    <Resource name="images" {...IMAGE_UI} />
     <CustomRoutes>
       <Route path="/" element={<ProfileShow />} />
       <Route path="/edit" element={<ProfileEdit />} />

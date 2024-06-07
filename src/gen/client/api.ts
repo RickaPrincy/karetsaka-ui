@@ -111,8 +111,19 @@ export interface Appointment {
    * @type {string}
    * @memberof Appointment
    */
-  status: string;
+  status: AppointmentStatusEnum;
 }
+
+export const AppointmentStatusEnum = {
+  Pending: "PENDING",
+  Validated: "VALIDATED",
+  Rejected: "REJECTED",
+  Archived: "ARCHIVED",
+} as const;
+
+export type AppointmentStatusEnum =
+  (typeof AppointmentStatusEnum)[keyof typeof AppointmentStatusEnum];
+
 /**
  *
  * @export
@@ -355,6 +366,12 @@ export interface Image {
    * @memberof Image
    */
   url: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Image
+   */
+  name: string;
 }
 /**
  *
@@ -2409,10 +2426,14 @@ export const ImagesApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {any} [page]
+     * @param {any} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getImages: async (
+      page?: any,
+      pageSize?: any,
       options: RawAxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       const localVarPath = `/images`;
@@ -2430,6 +2451,18 @@ export const ImagesApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      if (page !== undefined) {
+        for (const [key, value] of Object.entries(page)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
+
+      if (pageSize !== undefined) {
+        for (const [key, value] of Object.entries(pageSize)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2571,16 +2604,23 @@ export const ImagesApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {any} [page]
+     * @param {any} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async getImages(
+      page?: any,
+      pageSize?: any,
       options?: RawAxiosRequestConfig
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Image>>
     > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.getImages(options);
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getImages(
+        page,
+        pageSize,
+        options
+      );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap["ImagesApi.getImages"]?.[
@@ -2665,12 +2705,18 @@ export const ImagesApiFactory = function (
     /**
      *
      * @summary
+     * @param {any} [page]
+     * @param {any} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getImages(options?: any): AxiosPromise<Array<Image>> {
+    getImages(
+      page?: any,
+      pageSize?: any,
+      options?: any
+    ): AxiosPromise<Array<Image>> {
       return localVarFp
-        .getImages(options)
+        .getImages(page, pageSize, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -2726,13 +2772,19 @@ export class ImagesApi extends BaseAPI {
   /**
    *
    * @summary
+   * @param {any} [page]
+   * @param {any} [pageSize]
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ImagesApi
    */
-  public getImages(options?: RawAxiosRequestConfig) {
+  public getImages(
+    page?: any,
+    pageSize?: any,
+    options?: RawAxiosRequestConfig
+  ) {
     return ImagesApiFp(this.configuration)
-      .getImages(options)
+      .getImages(page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 

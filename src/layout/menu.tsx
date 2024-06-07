@@ -10,6 +10,7 @@ export const Menu: FC = () => {
       <RaMenu.ResourceItem name="cars" />
       <RaMenu.ResourceItem name="profiles" />
       <RaMenu.ResourceItem name="carBrands" />
+      <RaMenu.ResourceItem name="images" />
     </RaMenu>
   );
 };

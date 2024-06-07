@@ -9,7 +9,7 @@ export const PictureField: FC<
 > = ({
   source = "picture",
   defaultImage,
-  imageProps,
+  imageProps = {},
   ...functionFieldProps
 }) => {
   const { style, ...restImageProps } = imageProps;

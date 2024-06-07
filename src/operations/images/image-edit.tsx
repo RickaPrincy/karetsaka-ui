@@ -1,9 +1,9 @@
-import { required } from "@/common/input-validator";
-import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
-import { Image } from "@/gen/client";
 import { FC } from "react";
 import { Edit, SaveButton, SimpleForm, TextInput, Toolbar } from "react-admin";
 import { useParams } from "react-router-dom";
+import { Image } from "@/gen/client";
+import { required } from "@/common/input-validator";
+import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 
 export const ImageEdit: FC = () => {
   const { id } = useParams();
@@ -25,13 +25,13 @@ export const ImageEdit: FC = () => {
         }
       >
         <TextInput
-          source="url"
-          label="Url"
+          source="name"
+          label="Name"
           validate={required()}
           {...COMMON_INPUT_PROPS}
         />
         <TextInput
-          source="productId"
+          source="url"
           label="Product ID"
           validate={required()}
           {...COMMON_INPUT_PROPS}
