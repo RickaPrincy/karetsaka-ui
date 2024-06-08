@@ -46,6 +46,7 @@ export function ResponsiveAppBar() {
           },
         }}
       >
+        <Link href="/client">Home</Link>
         <Link href="/cars">Cars</Link>
         <Link href="/contact">Contact Us</Link>
         <Link href="/about">About</Link>
