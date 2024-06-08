@@ -1,60 +1,67 @@
 import { FC } from "react";
-import {
-  Button,
-  ImageListItem,
-  ImageListItemBar,
-  IconButton,
-} from "@mui/material";
-import { Info as InfoIcon } from "@mui/icons-material";
-import { Car } from "@/gen/client";
-import { useRedirect } from "react-admin";
+import { Box, Typography, BoxProps } from "@mui/material";
+import { Car, CarMotorTypeEnum } from "@/gen/client";
+import defaultImage from "@/assets/images/golf.png";
 import Image from "next/image";
+import { FlexBox } from "@/common/components/box";
+import { renderMoney } from "@/common/utils/typo";
+
+const getMotorColorr = (value: CarMotorTypeEnum) => {
+  switch (value) {
+    case "DIESEL":
+      return "#2d7a8a";
+    case "ELECTRIC":
+      return "#822673";
+    case "GASOLINE":
+      return "#c71e23";
+    default:
+      return "#cfa62d";
+  }
+};
 
 //TODO: fix image on car
 //TODO: change this
-export const CarCard: FC<{ car: Car }> = ({ car }) => {
-  const redirect = useRedirect();
-
+export const CarCard: FC<{ car: Car } & BoxProps> = ({ car, ...boxProps }) => {
   return (
-    <Button
-      onClick={() => {
-        redirect("show", "cars", car.id);
+    <Box
+      sx={{
+        "p": 2,
+        "bgcolor": "rgba(183, 189, 185, .1)",
+        "borderRadius": "5px",
+        "transition": "all linear .5s",
+        "cursor": "pointer",
+        "&:hover": {
+          scale: "1.05",
+        },
       }}
+      {...boxProps}
     >
-      <ImageListItem
-        key={car.id}
-        sx={{
-          "transition": "0.3s",
-          "&:hover": {
-            boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.3)",
-          },
-          "margin": "6px",
-          "maxWidth": "350px",
-        }}
-      >
-        <Image
-          src={
-            "https://i.pinimg.com/564x/79/8b/04/798b0446000b72ba17ae4f5e32a77643.jpg"
-          }
-          alt={car.model}
-          width={400}
-          height={300}
-          layout="responsive"
-          quality={100}
-        />
-        <ImageListItemBar
-          title={`${"brand here"} ${car.model}`}
-          subtitle={`Year: 500`}
-          actionIcon={
-            <IconButton
-              sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-              aria-label={`info about ${car.brand} ${car.model}`}
-            >
-              <InfoIcon />
-            </IconButton>
-          }
-        />
-      </ImageListItem>
-    </Button>
+      <Image src={defaultImage} width={250} height={250} alt={car.name} />
+      <FlexBox sx={{ justifyContent: "space-between" }}>
+        <Typography sx={{ color: "white", fontWeight: "bold" }}>
+          {car.name}
+        </Typography>{" "}
+        <Typography
+          sx={{
+            color: "white",
+            p: "5px 8px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            fontWeight: "bold",
+            bgcolor: getMotorColorr(car.motorType),
+          }}
+        >
+          {car.motorType}
+        </Typography>
+      </FlexBox>
+      <FlexBox sx={{ mt: "5px", justifyContent: "space-between" }}>
+        <Typography sx={{ color: "white" }}>
+          {renderMoney(car.price)}
+        </Typography>
+        <Typography sx={{ fontWeight: "bold", color: "white" }}>
+          {car.brand.name}
+        </Typography>
+      </FlexBox>
+    </Box>
   );
 };

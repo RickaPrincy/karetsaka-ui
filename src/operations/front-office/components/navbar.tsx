@@ -18,7 +18,8 @@ export function ResponsiveAppBar() {
         flexDirection: "row",
         px: 4,
         py: 2,
-        backgroundColor: "transparent",
+        backgroundColor: "#0b0c40",
+        zIndex: 999,
         boxShadow: "none",
         justifyContent: "space-between",
       }}

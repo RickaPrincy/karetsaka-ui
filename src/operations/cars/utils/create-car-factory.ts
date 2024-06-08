@@ -16,4 +16,5 @@ export const createCarFactory = (
   color: [toCreate.color],
   placeNumber: +toCreate.placeNumber,
   power: +toCreate.power,
+  price: +toCreate.price,
 });
