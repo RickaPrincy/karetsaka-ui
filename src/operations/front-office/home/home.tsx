@@ -10,6 +10,7 @@ import { carBrandProvider } from "@/providers/car-brand-provider";
 import { CarBrandC } from "@/operations/car-brands/components";
 import golf from "@/assets/images/golf.png";
 import Image from "next/image";
+import { ContactForm } from "../contact/components";
 
 export const HomePage: FC = () => {
   const { data: carBrands = [], isLoading: brandsLoading } = useQuery({
@@ -96,6 +97,7 @@ export const HomePage: FC = () => {
         Most popular cars
       </Typography>
       <CarList />
+      <ContactForm />
     </>
   );
 };
