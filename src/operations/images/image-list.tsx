@@ -6,7 +6,7 @@ import { List } from "@/common/components/list";
 export const ImageList: FC = () => {
   return (
     <List title="Images">
-      <Datagrid rowClick="show">
+      <Datagrid rowClick="show" bulkActionButtons={false}>
         <TextField source="name" label="Name" />
         <PictureField
           source="url"

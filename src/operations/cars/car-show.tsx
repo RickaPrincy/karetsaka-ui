@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { EditButton, ShowGuesser, TopToolbar } from "react-admin";
+import { DeleteButton, EditButton, ShowGuesser, TopToolbar } from "react-admin";
 import { useParams } from "react-router-dom";
 
 export const CarShow: FC = () => {
@@ -10,6 +10,7 @@ export const CarShow: FC = () => {
       actions={
         <TopToolbar>
           <EditButton variant="contained" />
+          <DeleteButton variant="contained" />
         </TopToolbar>
       }
       id={id}

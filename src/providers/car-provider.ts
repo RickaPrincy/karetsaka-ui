@@ -27,7 +27,9 @@ export const carProvider: KaretsakaDataProvider<Car> = {
       .crupdateCar(car as any)
       .then((response) => response.data);
   },
-  delete: async () => {
-    throw new Error("Not implemented");
+  delete: async (id) => {
+    return carsApi()
+      .deleteCarById(id)
+      .then((response) => response.data);
   },
 };

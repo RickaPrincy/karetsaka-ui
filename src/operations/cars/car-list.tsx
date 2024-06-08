@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useListContext, useRedirect } from "react-admin";
-import { CarCard } from "./components";
+import { TextInput, useListContext, useRedirect } from "react-admin";
+import { CarCard, SelectMotorTypeInput } from "./components";
 import { Car } from "@/gen/client";
 import { FlexBox } from "@/common/components/box";
 import { List } from "@/common/components/list";
@@ -9,6 +9,12 @@ export const CarList: FC = () => {
   return (
     <List
       title="Cars"
+      filters={[
+        <TextInput source="brandName" label="Brand name" />,
+        <SelectMotorTypeInput />,
+        <TextInput alwaysOn source="type" label="Type" />,
+        <TextInput source="model" label="Model" />,
+      ]}
       sx={{
         "& .RaList-content": {
           p: 2,

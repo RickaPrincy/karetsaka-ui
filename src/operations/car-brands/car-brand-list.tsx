@@ -25,7 +25,9 @@ const ListContent = () => {
   const { data: brands = [] } = useListContext<CarBrand>();
   const redirect = useRedirect();
   return (
-    <FlexBox sx={{ flexWrap: "wrap", alignItems: "center" }}>
+    <FlexBox
+      sx={{ flexWrap: "wrap", justifyContent: "start", alignItems: "center" }}
+    >
       {brands.map((el) => (
         <CarBrandC
           onClick={() => {

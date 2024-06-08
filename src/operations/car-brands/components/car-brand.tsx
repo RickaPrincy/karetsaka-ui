@@ -12,14 +12,16 @@ export const CarBrandC: FC<CarBrandProps> = ({ brand, ...boxProps }) => {
   return (
     <FlexBox
       sx={{
-        alignItems: "center",
-        gap: 2,
-        p: 1.5,
-        boxShadow: "0px 0px 1px white",
-        width: "fit-content",
-        cursor: "pointer",
-        borderRadius: "15px",
-        m: 1,
+        "alignItems": "center",
+        "gap": 2,
+        "p": 1.5,
+        "width": "fit-content",
+        "cursor": "pointer",
+        "borderRadius": "15px",
+        "m": 1,
+        "&:hover": {
+          boxShadow: "0px 0px 1px white",
+        },
       }}
       {...boxProps}
     >

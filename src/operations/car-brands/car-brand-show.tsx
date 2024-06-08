@@ -1,5 +1,6 @@
 import { FC } from "react";
 import {
+  DeleteButton,
   EditButton,
   Show,
   SimpleShowLayout,
@@ -18,6 +19,7 @@ export const CarBrandShow: FC = () => {
       actions={
         <TopToolbar>
           <EditButton variant="contained" />
+          <DeleteButton variant="contained" />
         </TopToolbar>
       }
     >
