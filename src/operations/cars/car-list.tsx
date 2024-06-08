@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FC } from "react";
 import { TextInput, useListContext, useRedirect } from "react-admin";
 import { CarCard, SelectMotorTypeInput } from "./components";

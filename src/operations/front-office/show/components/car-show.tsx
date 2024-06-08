@@ -1,11 +1,13 @@
-import { CircularProgress, Typography, Box } from "@mui/material";
+"use client";
+import { useState } from "react";
+import { CircularProgress, Typography, Box, Button } from "@mui/material";
 import { Check } from "@mui/icons-material";
 import Image from "next/image";
 import { FlexBox } from "@/common/components/box";
 import { useQuery } from "react-query";
 import { carProvider } from "@/providers/car-provider";
 import golf from "@/assets/images/golf.png";
-
+import { AppointmentForm } from "../../appointment/components";
 export const InfoField = ({
   label,
   value,
@@ -23,6 +25,16 @@ export const CarShow = ({ id }: { id: string }) => {
     queryFn: () => carProvider.getOne(id, {}),
     queryKey: ["cars"],
   });
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   if (isLoading) {
     return <CircularProgress color="warning" />;
@@ -60,7 +72,13 @@ export const CarShow = ({ id }: { id: string }) => {
         <Typography sx={{ fontSize: "14px", color: "white", opacity: 0.9 }}>
           {car!.description}
         </Typography>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+          <Button variant="contained" onClick={handleClickOpen}>
+            Appointment
+          </Button>
+        </Box>
       </Box>
+      <AppointmentForm open={open} onClose={handleClose} />
     </FlexBox>
   );
 };
