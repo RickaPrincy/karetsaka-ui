@@ -8,4 +8,10 @@ export const PALETTE_COLORS = {
   black: {
     "1": "#4f4e4c",
   },
+  red: {
+    "1": "#eb4034",
+  },
+  orange: {
+    "1": "#d65b09",
+  },
 };

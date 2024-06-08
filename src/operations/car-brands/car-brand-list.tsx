@@ -1,8 +1,10 @@
 import { FC } from "react";
-import { Datagrid, EditButton, TextField, TextInput } from "react-admin";
-import { PictureField } from "@/common/components/fields";
+import { TextInput, useListContext, useRedirect } from "react-admin";
 import { List } from "@/common/components/list";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
+import { CarBrand } from "@/gen/client";
+import { CarBrandC } from "./components";
+import { FlexBox } from "@/common/components/box";
 
 //TODO: rename PictureField
 export const CarBrandList: FC = () => {
@@ -14,11 +16,25 @@ export const CarBrandList: FC = () => {
         <TextInput alwaysOn key="name" source="name" {...COMMON_INPUT_PROPS} />,
       ]}
     >
-      <Datagrid rowClick="show">
-        <TextField source="name" label="Name" />
-        <PictureField source="picture" label="Picture" />
-        <EditButton color="warning" />
-      </Datagrid>
+      <ListContent />
     </List>
+  );
+};
+
+const ListContent = () => {
+  const { data: brands = [] } = useListContext<CarBrand>();
+  const redirect = useRedirect();
+  return (
+    <FlexBox sx={{ flexWrap: "wrap", alignItems: "center" }}>
+      {brands.map((el) => (
+        <CarBrandC
+          onClick={() => {
+            redirect("show", "carBrands", el.id);
+          }}
+          brand={el}
+          key={el.id}
+        />
+      ))}
+    </FlexBox>
   );
 };

@@ -1,23 +1,5 @@
-import {
-  CarBrand,
-  LandingPage,
-  CarList,
-  ContactForm,
-} from "@/operations/front-office/home/components";
+import { HomePage } from "@/operations/front-office/home/home";
 
 export default function Home() {
-  return (
-    <div className="overflow-hidden">
-      <LandingPage />
-      <div className="mt-12 padding-x padding-y max-width">
-        <CarBrand />
-      </div>
-      <div className="mt-12 padding-x padding-y max-width">
-        <CarList />
-      </div>
-      <div className="mt-12 padding-x padding-y max-width">
-        <ContactForm />
-      </div>
-    </div>
-  );
+  return <HomePage />;
 }

@@ -1,23 +1,52 @@
-import type { Metadata } from "next";
-import "../globals.css";
+"use client";
 import { ResponsiveAppBar } from "@/operations/front-office/components";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Box, Typography } from "@mui/material";
+import { Favorite } from "@mui/icons-material";
+import { FlexBox } from "@/common/components/box";
+import { PALETTE_COLORS } from "@/common/utils/palette-colors";
 
-export const metadata: Metadata = {
-  title: "Karetsaka",
-  description: "Buy your car here",
-};
+const queryClient = new QueryClient();
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <div
+      style={{
+        width: "100%",
+        backgroundColor: "#0b0c40",
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
         <ResponsiveAppBar />
         {children}
-      </body>
-    </html>
+        <FlexBox sx={{ width: "100%", p: 5, bgcolor: "#06022e", mt: 5 }}>
+          <Box sx={{ flex: 1 }}>
+            <Typography
+              variant="h1"
+              sx={{ fontSize: "25px", color: "white", textAlign: "center" }}
+            >
+              <span
+                style={{
+                  color: PALETTE_COLORS.orange["1"],
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                K
+              </span>
+              aretsaka
+            </Typography>
+            <Typography sx={{ color: "white", textAlign: "center" }}>
+              Made by <Favorite color="warning" />{" "}
+              <span style={{ fontWeight: "bold" }}>Karetsaka team</span>
+            </Typography>
+          </Box>
+        </FlexBox>
+      </QueryClientProvider>
+    </div>
   );
 }

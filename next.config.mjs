@@ -24,6 +24,15 @@ const nextConfig = {
     EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
     EMAILJS_AUTHENTICATION_ID: process.env.EMAILJS_AUTHENTICATION_ID,
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/client",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
