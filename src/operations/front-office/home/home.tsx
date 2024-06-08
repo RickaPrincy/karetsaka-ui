@@ -11,6 +11,7 @@ import { CarBrandC } from "@/operations/car-brands/components";
 import golf from "@/assets/images/golf.png";
 import Image from "next/image";
 import { ContactForm } from "../contact/components";
+import Link from "next/link";
 
 export const HomePage: FC = () => {
   const { data: carBrands = [], isLoading: brandsLoading } = useQuery({
@@ -65,22 +66,25 @@ export const HomePage: FC = () => {
               <CircularProgress color="warning" />
             ) : (
               carBrands.map((el) => (
-                <CarBrandC
-                  sx={{
-                    "display": "flex",
-                    "gap": 2,
-                    "m": 2,
-                    "boxShadow": "none",
-                    "transition": "all linear .5ms",
-                    "cursor": "pointer",
-                    "p": 2,
-                    "&:hover": {
-                      boxShadow: "0px 0px 1px white",
-                    },
-                  }}
-                  brand={el}
-                  key={el.id}
-                />
+                <Link key={el.id} href={`/search`} passHref>
+                  <a style={{ textDecoration: "none" }}>
+                    <CarBrandC
+                      sx={{
+                        "display": "flex",
+                        "gap": 2,
+                        "m": 2,
+                        "boxShadow": "none",
+                        "transition": "all linear 0.5s",
+                        "cursor": "pointer",
+                        "p": 2,
+                        "&:hover": {
+                          boxShadow: "0px 0px 1px white",
+                        },
+                      }}
+                      brand={el}
+                    />
+                  </a>
+                </Link>
               ))
             )}
           </FlexBox>
