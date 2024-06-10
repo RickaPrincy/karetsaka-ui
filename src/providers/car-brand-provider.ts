@@ -3,6 +3,13 @@ import { KaretsakaDataProvider } from "./type";
 import { carsApi } from "./api";
 import axios from "axios";
 import authFirebase from "@/security/auth-firebase";
+import { storageProvider } from "./storage-provider";
+
+export const BRAND_KEY = "brands";
+
+export const createBrandPath = (name: string) => {
+  return `${BRAND_KEY}/${name}`;
+};
 
 export const carBrandProvider: KaretsakaDataProvider<CarBrand> = {
   getList: async (page, pageSize, filter) => {
@@ -21,6 +28,12 @@ export const carBrandProvider: KaretsakaDataProvider<CarBrand> = {
       .then((response) => response.data);
   },
   delete: async (id) => {
+    try {
+      await storageProvider.deleteFile(createBrandPath(id));
+    } catch {
+      console.error("File cannot be deleted");
+    }
+
     return axios
       .delete(`${process.env.API_URL!}/cars/brands/${id}`, {
         headers: {

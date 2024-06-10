@@ -4,15 +4,26 @@ import { v4 as uuid } from "uuid";
 import { CarBrand } from "@/gen/client";
 import { required } from "@/common/input-validator";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
+import { createBrandPath } from "@/providers/car-brand-provider";
+import { ImageInput, retrieveImageFactory } from "@/common/components/inputs";
+import { storageProvider } from "@/providers/storage-provider";
 
 export const CarBrandCreate: FC = () => {
   return (
     <Create
       title="Create car brand"
-      transform={(carBrandToCreate: Omit<CarBrand, "id">): CarBrand => {
+      transform={async (data: any): Promise<CarBrand> => {
+        const id = uuid();
+        const { rawFile } = retrieveImageFactory(data, "image");
+        const { url } = await storageProvider.uploadFiles({
+          path: createBrandPath(id!),
+          rawFile,
+        });
+
         return {
-          id: uuid(),
-          ...carBrandToCreate,
+          id: id!,
+          name: data.name,
+          picture: url,
         };
       }}
     >
@@ -23,12 +34,7 @@ export const CarBrandCreate: FC = () => {
           validate={required()}
           {...COMMON_INPUT_PROPS}
         />
-        <TextInput
-          source="picture"
-          label="Picture"
-          validate={required()}
-          {...COMMON_INPUT_PROPS}
-        />
+        <ImageInput source="image" />
       </SimpleForm>
     </Create>
   );

@@ -1,6 +1,13 @@
 import { Image } from "@/gen/client";
 import { KaretsakaDataProvider } from "./type";
 import { imagesApi } from "./api";
+import { storageProvider } from "./storage-provider";
+
+export const IMAGE_KEY = "cars";
+
+export const createImagePath = (name: string) => {
+  return `${IMAGE_KEY}/${name}`;
+};
 
 export const imageProvider: KaretsakaDataProvider<Image> = {
   getList: async (page, pageSize) => {
@@ -22,6 +29,12 @@ export const imageProvider: KaretsakaDataProvider<Image> = {
       .then((response) => response.data);
   },
   delete: async (id) => {
+    try {
+      await storageProvider.deleteFile(createImagePath(id));
+    } catch {
+      console.error("File cannot be deleted");
+    }
+
     return imagesApi()
       .deleteImageById(id)
       .then((response) => response.data);

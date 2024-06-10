@@ -1,19 +1,30 @@
 import { FC } from "react";
 import { Create, SimpleForm, TextInput } from "react-admin";
 import { v4 as uuid } from "uuid";
-import { Image } from "@/gen/client";
-import { required } from "@/common/input-validator";
+import { ImageInput, retrieveImageFactory } from "@/common/components/inputs";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
+import { required } from "@/common/input-validator";
+import { Image } from "@/gen/client";
+import { storageProvider } from "@/providers/storage-provider";
+import { createImagePath } from "@/providers/image-provider";
 
 export const ImageCreate: FC = () => {
   return (
     <Create
       redirect="show"
       title="Create Image"
-      transform={(imageToCreate: Omit<Image, "id">): Image => {
+      transform={async (data: any): Promise<Image> => {
+        const id = uuid();
+        const { rawFile } = retrieveImageFactory(data, "image");
+        const { url } = await storageProvider.uploadFiles({
+          path: createImagePath(id),
+          rawFile,
+        });
+
         return {
-          id: uuid(),
-          ...imageToCreate,
+          id,
+          name: data.name,
+          url,
         };
       }}
     >
@@ -24,12 +35,7 @@ export const ImageCreate: FC = () => {
           validate={required()}
           {...COMMON_INPUT_PROPS}
         />
-        <TextInput
-          source="url"
-          label="Url"
-          validate={required()}
-          {...COMMON_INPUT_PROPS}
-        />
+        <ImageInput source="image" />
       </SimpleForm>
     </Create>
   );

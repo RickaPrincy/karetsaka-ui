@@ -5,6 +5,12 @@ import { EmailType, emailProvider } from "./email-provider";
 import { usersApi } from "./api";
 import authFirebase from "@/security/auth-firebase";
 
+export const USER_KEY = "users";
+
+export const createProfilePath = (name: string) => {
+  return `${USER_KEY}/${name}`;
+};
+
 export const createUserAndSendEmail = async ({ email }: { email: string }) => {
   const GENERATED_PASSWORD = PASSWORD_GENERATOR.generate({
     numbers: true,
