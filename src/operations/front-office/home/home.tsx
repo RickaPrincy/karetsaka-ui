@@ -3,21 +3,23 @@
 import { FC } from "react";
 import { Typography, CircularProgress, Box } from "@mui/material";
 import { useQuery } from "react-query";
+import Image from "next/image";
+import Link from "next/link";
+
 import { FlexBox } from "@/common/components/box";
 import { PALETTE_COLORS } from "@/common/utils/palette-colors";
 import { CarList, SearchComponent } from "./components";
-import { carBrandProvider } from "@/providers/car-brand-provider";
 import { CarBrandC } from "@/operations/car-brands/components";
-import golf from "@/assets/images/golf.png";
-import Image from "next/image";
 import { ContactForm } from "../contact/components";
-import Link from "next/link";
+import { carBrandProvider } from "@/providers/car-brand-provider";
+import golf from "@/assets/images/golf.png";
 
 export const HomePage: FC = () => {
   const { data: carBrands = [], isLoading: brandsLoading } = useQuery({
     queryFn: () => carBrandProvider.getList(1, 6, {}, {}, {}),
     queryKey: ["carBrands"],
   });
+
   return (
     <>
       <FlexBox
@@ -61,29 +63,27 @@ export const HomePage: FC = () => {
           >
             Brands populars
           </Typography>
-          <FlexBox sx={{ color: "white", maxWidth: "600px" }}>
+          <FlexBox sx={{ color: "white", maxWidth: "400px" }}>
             {brandsLoading ? (
               <CircularProgress color="warning" />
             ) : (
               carBrands.map((el) => (
-                <Link key={el.id} href={`/search`} passHref>
-                  <a style={{ textDecoration: "none" }}>
-                    <CarBrandC
-                      sx={{
-                        "display": "flex",
-                        "gap": 2,
-                        "m": 2,
-                        "boxShadow": "none",
-                        "transition": "all linear 0.5s",
-                        "cursor": "pointer",
-                        "p": 2,
-                        "&:hover": {
-                          boxShadow: "0px 0px 1px white",
-                        },
-                      }}
-                      brand={el}
-                    />
-                  </a>
+                <Link key={el.id} href={`/search`}>
+                  <CarBrandC
+                    sx={{
+                      "display": "flex",
+                      "gap": 2,
+                      "m": 2,
+                      "boxShadow": "none",
+                      "transition": "all linear 0.5s",
+                      "cursor": "pointer",
+                      "p": 2,
+                      "&:hover": {
+                        boxShadow: "0px 0px 1px white",
+                      },
+                    }}
+                    brand={el}
+                  />
                 </Link>
               ))
             )}

@@ -13,4 +13,6 @@ export const FLEX_BOX_SX: SxProps = {
 
 export const COMMON_INPUT_PROPS = {
   fullWidth: true,
+  size: "small",
+  variant: "outlined",
 } satisfies Partial<TextInputProps> satisfies Partial<PasswordInputProps> satisfies Partial<DateInputProps>;

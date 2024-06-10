@@ -1,61 +1,115 @@
-"use client";
-
-import { useState, ChangeEvent, FormEvent } from "react";
-import { TextField, Button, Typography, Grid, Box } from "@mui/material";
+import { useState } from "react";
+import {
+  TextField,
+  Snackbar,
+  SxProps,
+  Button,
+  Typography,
+  Alert,
+  Box,
+} from "@mui/material";
 import {
   Phone as PhoneIcon,
   Email as EmailIcon,
   LocationOn as LocationOnIcon,
 } from "@mui/icons-material";
+import { useForm } from "react-hook-form";
+import Link from "next/link";
+
+import { FlexBox } from "@/common/components/box";
+import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
+import { EmailType, emailProvider } from "@/providers/email-provider";
+import { dumbLoading } from "@/common/utils/dumb-loading";
+
+export type FormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+const FORM_SX: SxProps = {
+  "mb": 2,
+  "& .MuiInputLabel-root": { color: "white" },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": { borderColor: "white" },
+    "&:hover fieldset": { borderColor: "white" },
+    "&.Mui-focused fieldset": { borderColor: "white" },
+  },
+  "& .MuiInputBase-input": { color: "white" },
+};
+
+type LoadingStateType = "NONE" | "PENDING" | "SENDED" | "ERROR";
+
+const getMessageConfig = (type: LoadingStateType) => {
+  switch (type) {
+    case "ERROR":
+      return "Oops an error occured !!";
+    case "PENDING":
+      return "Your message will be sent !!";
+    case "SENDED":
+      return "Message sended with success";
+    default:
+      return "";
+  }
+};
 
 export const ContactForm = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [message, setMessage] = useState<string>("");
+  const [loadingState, setLoadingState] = useState<LoadingStateType>("NONE");
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+  const { handleSubmit, register, reset } = useForm<FormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // TODO: Implement form submission logic
-    console.log("Form submitted:", { name, email, message });
-    setName("");
-    setEmail("");
-    setMessage("");
+  const sendEmail = async (data: FormData) => {
+    setLoadingState("PENDING");
+    emailProvider
+      .send({
+        type: EmailType.CONTACT_US,
+        data,
+      })
+      .then(() => {
+        setLoadingState("SENDED");
+        reset();
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoadingState("ERROR");
+      })
+      .finally(() => {
+        dumbLoading(() => {
+          setLoadingState("NONE");
+        }, 2000);
+      });
   };
 
   return (
     <Box>
-      <Box sx={{ textAlign: "center", mb: 6 }}>
-        <Typography
-          variant="h2"
-          sx={{
-            fontWeight: "bold",
-            fontSize: "2rem",
-            color: "white",
-          }}
-        >
-          Contact us
-        </Typography>
-      </Box>
-
-      <Grid
-        container
-        spacing={4}
-        alignItems="flex-start"
-        sx={{ ml: { xs: 0, md: 4 } }}
+      <Typography
+        variant="h2"
+        sx={{
+          fontWeight: "bold",
+          mt: 5,
+          mb: 2,
+          fontSize: "2rem",
+          color: "white",
+          textAlign: "center",
+        }}
       >
-        <Grid item xs={12} md={6}>
+        Contact us
+      </Typography>
+      <FlexBox
+        sx={{
+          gap: 5,
+          width: "calc(100% - 100px)",
+          mx: "auto",
+          alignItems: "start",
+        }}
+      >
+        <Box sx={{ flex: 1 }}>
           <Typography
             variant="h6"
             sx={{
@@ -67,76 +121,43 @@ export const ContactForm = () => {
           >
             Send us a message
           </Typography>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(sendEmail)}>
             <TextField
+              required
+              sx={FORM_SX}
+              color="warning"
               label="Your Name"
-              variant="outlined"
-              fullWidth
-              required
-              value={name}
-              onChange={handleNameChange}
-              sx={{
-                "mb": 2,
-                "& .MuiInputLabel-root": { color: "white" },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" },
-                  "&:hover fieldset": { borderColor: "white" },
-                  "&.Mui-focused fieldset": { borderColor: "white" },
-                },
-                "& .MuiInputBase-input": { color: "white" },
-              }}
+              {...register("name")}
+              {...COMMON_INPUT_PROPS}
             />
-
             <TextField
-              label="Your Email"
-              variant="outlined"
-              fullWidth
               required
+              sx={FORM_SX}
               type="email"
-              value={email}
-              onChange={handleEmailChange}
-              sx={{
-                "mb": 2,
-                "& .MuiInputLabel-root": { color: "white" },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" },
-                  "&:hover fieldset": { borderColor: "white" },
-                  "&.Mui-focused fieldset": { borderColor: "white" },
-                },
-                "& .MuiInputBase-input": { color: "white" },
-              }}
+              color="warning"
+              label="Your Email"
+              {...register("email")}
+              {...COMMON_INPUT_PROPS}
             />
-
             <TextField
-              label="Your Message"
-              variant="outlined"
-              fullWidth
               multiline
-              rows={4}
-              required
-              value={message}
-              onChange={handleMessageChange}
-              sx={{
-                "mb": 2,
-                "& .MuiInputLabel-root": { color: "white" },
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": { borderColor: "white" },
-                  "&:hover fieldset": { borderColor: "white" },
-                  "&.Mui-focused fieldset": { borderColor: "white" },
-                },
-                "& .MuiInputBase-input": { color: "white" },
-              }}
+              sx={FORM_SX}
+              color="warning"
+              label="Your Message"
+              {...register("message")}
+              {...COMMON_INPUT_PROPS}
             />
-
-            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-              <Button variant="contained" type="submit" color="warning">
-                Send Message
-              </Button>
-            </Box>
+            <Button
+              sx={{ ml: "auto", display: "block" }}
+              variant="contained"
+              type="submit"
+              color="warning"
+            >
+              Send Message
+            </Button>
           </form>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
+        </Box>
+        <Box sx={{ flex: 1 }}>
           <Typography
             variant="h6"
             sx={{
@@ -144,32 +165,45 @@ export const ContactForm = () => {
               fontSize: "1.5rem",
               color: "white",
             }}
-            gutterBottom
           >
             Contact information
           </Typography>
           <Box display="flex" alignItems="center" mb={2}>
             <PhoneIcon sx={{ mr: 1, color: "white" }} />
             <Typography variant="body1" sx={{ color: "white" }}>
-              +1 123 456 789
+              +261346251431
             </Typography>
           </Box>
-
           <Box display="flex" alignItems="center" mb={2}>
             <EmailIcon sx={{ mr: 1, color: "white" }} />
             <Typography variant="body1" sx={{ color: "white" }}>
-              admin@example.com
+              <Link href="mailto:rckprincy@gmail.com">
+                rckprincy@example.com
+              </Link>
             </Typography>
           </Box>
-
           <Box display="flex" alignItems="center">
             <LocationOnIcon sx={{ mr: 1, color: "white" }} />
             <Typography variant="body1" sx={{ color: "white" }}>
-              Mada, City, Country
+              Madagascar, Antananarivo
             </Typography>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </FlexBox>
+      <Snackbar open={loadingState !== "NONE"}>
+        <Alert
+          variant="filled"
+          severity={
+            loadingState == "PENDING"
+              ? "info"
+              : loadingState == "ERROR"
+                ? "error"
+                : "success"
+          }
+        >
+          {getMessageConfig(loadingState)}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

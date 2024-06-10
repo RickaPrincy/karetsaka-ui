@@ -23,15 +23,7 @@ const nextConfig = {
     EMAILJS_PUBLIC_KEY_ID: process.env.EMAILJS_PUBLIC_KEY_ID,
     EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
     EMAILJS_AUTHENTICATION_ID: process.env.EMAILJS_AUTHENTICATION_ID,
-  },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/client",
-        permanent: false,
-      },
-    ];
+    EMAILJS_CONTACT_US_ID: process.env.EMAILJS_CONTACT_US_ID,
   },
 };
 

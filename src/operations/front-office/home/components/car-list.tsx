@@ -1,9 +1,10 @@
-import { FlexBox } from "@/common/components/box";
-import { CircularProgress } from "@mui/material";
-import { carProvider } from "@/providers/car-provider";
 import { useQuery } from "react-query";
-import { CarCard } from "@/operations/cars/components";
+import { CircularProgress } from "@mui/material";
 import Link from "next/link";
+
+import { FlexBox } from "@/common/components/box";
+import { CarCard } from "@/operations/cars/components";
+import { carProvider } from "@/providers/car-provider";
 
 export const CarList = () => {
   const { data: cars = [], isLoading } = useQuery({
@@ -12,11 +13,16 @@ export const CarList = () => {
   });
 
   if (isLoading) {
-    return <CircularProgress color="warning" />;
+    return (
+      <FlexBox sx={{ width: "100%" }}>
+        <CircularProgress color="warning" />
+      </FlexBox>
+    );
   }
+
   return (
     <FlexBox sx={{ width: "90%", mt: 5, flexWrap: "wrap" }}>
-      {(cars || []).map((el) => (
+      {cars.map((el) => (
         <Link key={el.id} href={`/client/${el.id}`}>
           <CarCard car={el} />
         </Link>
