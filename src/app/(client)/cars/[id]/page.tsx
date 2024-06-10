@@ -1,7 +1,7 @@
 "use client";
 
-import { CarShow } from "@/operations/front-office/show/components";
 import { useParams } from "next/navigation";
+import { CarShow } from "@/operations/front-office/show/components";
 
 export default function Car() {
   const { id } = useParams();

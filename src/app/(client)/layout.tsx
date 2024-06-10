@@ -1,14 +1,16 @@
 "use client";
-import { ResponsiveAppBar } from "@/operations/front-office/components";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Box, Typography } from "@mui/material";
 import { Favorite } from "@mui/icons-material";
+
+import { ResponsiveAppBar } from "@/operations/front-office/components";
 import { FlexBox } from "@/common/components/box";
 import { PALETTE_COLORS } from "@/common/utils/palette-colors";
 
 const queryClient = new QueryClient();
 
-export default function Layout({
+export default function Provider({
   children,
 }: Readonly<{
   children: React.ReactNode;
