@@ -29,12 +29,7 @@ export const ImageInput = ({
   ...imageInputProps
 }: ImageInputProps) => {
   return (
-    <RaImageInput
-      isRequired
-      label=" "
-      accept="image/jpeg,image/png,image/webp"
-      {...imageInputProps}
-    >
+    <RaImageInput isRequired {...imageInputProps}>
       <ImageField source="src" title="title" {...imageFieldProps} />
     </RaImageInput>
   );

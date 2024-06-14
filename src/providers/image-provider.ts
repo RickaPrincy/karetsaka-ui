@@ -10,9 +10,9 @@ export const createImagePath = (name: string) => {
 };
 
 export const imageProvider: KaretsakaDataProvider<Image> = {
-  getList: async (page, pageSize) => {
+  getList: async (page, pageSize, filter: { name?: string }) => {
     return imagesApi()
-      .getImages(page, pageSize)
+      .getImages(filter.name, page, pageSize)
       .then((response) => response.data);
   },
   getOne: async (id) => {
@@ -23,10 +23,11 @@ export const imageProvider: KaretsakaDataProvider<Image> = {
         .then((response) => response.data)
     );
   },
+  //TODO: do multiple image creation
   saveOrUpdate: async (image) => {
     return imagesApi()
-      .saveOrUpdate(image)
-      .then((response) => response.data);
+      .saveOrUpdate([image])
+      .then((response) => response.data[0]);
   },
   delete: async (id) => {
     try {

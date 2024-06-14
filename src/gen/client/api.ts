@@ -147,7 +147,7 @@ export interface Car {
    * @type {string}
    * @memberof Car
    */
-  description?: string;
+  description: string;
   /**
    *
    * @type {string}
@@ -262,7 +262,7 @@ export interface CrupdateCar {
    * @type {string}
    * @memberof CrupdateCar
    */
-  description?: string;
+  description: string;
   /**
    *
    * @type {string}
@@ -1069,6 +1069,68 @@ export const CarsApiAxiosParamCreator = function (
      *
      * @summary
      * @param {string} id
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteCarBrand: async (
+      id: string,
+      page?: any,
+      pageSize?: any,
+      options: RawAxiosRequestConfig = {}
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'id' is not null or undefined
+      assertParamExists("deleteCarBrand", "id", id);
+      const localVarPath = `/cars/brands/{id}`.replace(
+        `{${"id"}}`,
+        encodeURIComponent(String(id))
+      );
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "DELETE",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      if (page !== undefined) {
+        for (const [key, value] of Object.entries(page)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
+
+      if (pageSize !== undefined) {
+        for (const [key, value] of Object.entries(pageSize)) {
+          localVarQueryParameter[key] = value;
+        }
+      }
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -1447,6 +1509,42 @@ export const CarsApiFp = function (configuration?: Configuration) {
      *
      * @summary
      * @param {string} id
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async deleteCarBrand(
+      id: string,
+      page?: any,
+      pageSize?: any,
+      options?: RawAxiosRequestConfig
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CarBrand>
+    > {
+      const localVarAxiosArgs = await localVarAxiosParamCreator.deleteCarBrand(
+        id,
+        page,
+        pageSize,
+        options
+      );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["CarsApi.deleteCarBrand"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -1673,6 +1771,25 @@ export const CarsApiFactory = function (
      *
      * @summary
      * @param {string} id
+     * @param {any} [page]
+     * @param {any} [pageSize]
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    deleteCarBrand(
+      id: string,
+      page?: any,
+      pageSize?: any,
+      options?: any
+    ): AxiosPromise<CarBrand> {
+      return localVarFp
+        .deleteCarBrand(id, page, pageSize, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary
+     * @param {string} id
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
@@ -1811,6 +1928,27 @@ export class CarsApi extends BaseAPI {
   ) {
     return CarsApiFp(this.configuration)
       .crupdateCarBrands(carBrand, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary
+   * @param {string} id
+   * @param {any} [page]
+   * @param {any} [pageSize]
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CarsApi
+   */
+  public deleteCarBrand(
+    id: string,
+    page?: any,
+    pageSize?: any,
+    options?: RawAxiosRequestConfig
+  ) {
+    return CarsApiFp(this.configuration)
+      .deleteCarBrand(id, page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -2426,12 +2564,14 @@ export const ImagesApiAxiosParamCreator = function (
     /**
      *
      * @summary
+     * @param {string} [name]
      * @param {any} [page]
      * @param {any} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getImages: async (
+      name?: string,
       page?: any,
       pageSize?: any,
       options: RawAxiosRequestConfig = {}
@@ -2451,6 +2591,10 @@ export const ImagesApiAxiosParamCreator = function (
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      if (name !== undefined) {
+        localVarQueryParameter["name"] = name;
+      }
 
       if (page !== undefined) {
         for (const [key, value] of Object.entries(page)) {
@@ -2481,12 +2625,12 @@ export const ImagesApiAxiosParamCreator = function (
     /**
      *
      * @summary
-     * @param {Image} image
+     * @param {Array<Image>} image
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     saveOrUpdate: async (
-      image: Image,
+      image: Array<Image>,
       options: RawAxiosRequestConfig = {}
     ): Promise<RequestArgs> => {
       // verify required parameter 'image' is not null or undefined
@@ -2604,12 +2748,14 @@ export const ImagesApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
+     * @param {string} [name]
      * @param {any} [page]
      * @param {any} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async getImages(
+      name?: string,
       page?: any,
       pageSize?: any,
       options?: RawAxiosRequestConfig
@@ -2617,6 +2763,7 @@ export const ImagesApiFp = function (configuration?: Configuration) {
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Image>>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getImages(
+        name,
         page,
         pageSize,
         options
@@ -2637,15 +2784,15 @@ export const ImagesApiFp = function (configuration?: Configuration) {
     /**
      *
      * @summary
-     * @param {Image} image
+     * @param {Array<Image>} image
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async saveOrUpdate(
-      image: Image,
+      image: Array<Image>,
       options?: RawAxiosRequestConfig
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Image>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Image>>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.saveOrUpdate(
         image,
@@ -2705,28 +2852,33 @@ export const ImagesApiFactory = function (
     /**
      *
      * @summary
+     * @param {string} [name]
      * @param {any} [page]
      * @param {any} [pageSize]
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getImages(
+      name?: string,
       page?: any,
       pageSize?: any,
       options?: any
     ): AxiosPromise<Array<Image>> {
       return localVarFp
-        .getImages(page, pageSize, options)
+        .getImages(name, page, pageSize, options)
         .then((request) => request(axios, basePath));
     },
     /**
      *
      * @summary
-     * @param {Image} image
+     * @param {Array<Image>} image
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    saveOrUpdate(image: Image, options?: any): AxiosPromise<Image> {
+    saveOrUpdate(
+      image: Array<Image>,
+      options?: any
+    ): AxiosPromise<Array<Image>> {
       return localVarFp
         .saveOrUpdate(image, options)
         .then((request) => request(axios, basePath));
@@ -2772,6 +2924,7 @@ export class ImagesApi extends BaseAPI {
   /**
    *
    * @summary
+   * @param {string} [name]
    * @param {any} [page]
    * @param {any} [pageSize]
    * @param {*} [options] Override http request option.
@@ -2779,24 +2932,25 @@ export class ImagesApi extends BaseAPI {
    * @memberof ImagesApi
    */
   public getImages(
+    name?: string,
     page?: any,
     pageSize?: any,
     options?: RawAxiosRequestConfig
   ) {
     return ImagesApiFp(this.configuration)
-      .getImages(page, pageSize, options)
+      .getImages(name, page, pageSize, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
   /**
    *
    * @summary
-   * @param {Image} image
+   * @param {Array<Image>} image
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof ImagesApi
    */
-  public saveOrUpdate(image: Image, options?: RawAxiosRequestConfig) {
+  public saveOrUpdate(image: Array<Image>, options?: RawAxiosRequestConfig) {
     return ImagesApiFp(this.configuration)
       .saveOrUpdate(image, options)
       .then((request) => request(this.axios, this.basePath));
