@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Create, SimpleForm } from "react-admin";
+import { Create, ReferenceInput, SimpleForm } from "react-admin";
 import { v4 as uuid } from "uuid";
 import { CrupdateCar } from "@/gen/client";
 import { CarInputs } from "./components/car-inputs";

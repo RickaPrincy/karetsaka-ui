@@ -4,6 +4,8 @@ import { SelectMotorTypeInput } from "./select-motor-type-input";
 import { required } from "@/common/input-validator";
 import { COMMON_INPUT_PROPS } from "@/common/utils/common-props";
 import { SelectBrand } from "./select-brand-input";
+import { ColorInputs } from "@/common/components/inputs";
+import { SelectImagesInput } from "./select-images-input";
 
 export const CarInputs: FC = () => {
   return (
@@ -32,13 +34,6 @@ export const CarInputs: FC = () => {
         validate={[required(), number(), minValue(1)]}
         {...COMMON_INPUT_PROPS}
       />
-      {/* FIXME: Should be an color pickers (multiple colors) */}
-      <TextInput
-        source="color"
-        label="Color"
-        validate={required()}
-        {...COMMON_INPUT_PROPS}
-      />
       <SelectMotorTypeInput />
       <TextInput
         source="power"
@@ -59,7 +54,9 @@ export const CarInputs: FC = () => {
         validate={required()}
         {...COMMON_INPUT_PROPS}
       />
-      <SelectBrand source="brandId" />
+      <SelectBrand />
+      <SelectImagesInput />
+      <ColorInputs />
     </>
   );
 };

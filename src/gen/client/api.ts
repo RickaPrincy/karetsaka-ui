@@ -202,6 +202,12 @@ export interface Car {
    * @memberof Car
    */
   brand: CarBrand;
+  /**
+   *
+   * @type {Array<Image>}
+   * @memberof Car
+   */
+  images: Array<Image>;
 }
 
 export const CarMotorTypeEnum = {
@@ -317,6 +323,12 @@ export interface CrupdateCar {
    * @memberof CrupdateCar
    */
   brandId: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof CrupdateCar
+   */
+  imagesId: Array<string>;
 }
 
 export const CrupdateCarMotorTypeEnum = {
