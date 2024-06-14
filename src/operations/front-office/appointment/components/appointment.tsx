@@ -30,9 +30,9 @@ type FormData = {
 };
 
 const schema = z.object({
-  CarId: z.string().nonempty(),
-  Name: z.string().nonempty(),
-  FirstName: z.string().nonempty(),
+  CarId: z.string(),
+  Name: z.string(),
+  FirstName: z.string(),
   Email: z.string().email(),
   Message: z.string(),
   Contact: z.string().min(10),

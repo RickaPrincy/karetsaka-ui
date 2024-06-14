@@ -21,7 +21,10 @@ export const InfoField = ({
   </>
 );
 
-export const CarShowLayout: FC<{ car: Car }> = ({ car }) => {
+export const CarShowLayout: FC<{ car: Car; data?: React.ReactNode }> = ({
+  car,
+  data,
+}) => {
   const { value, toggleValue } = useToggle();
   const showImage = car.images.length > 0 ? car.images[0].url : golf;
 
@@ -68,9 +71,12 @@ export const CarShowLayout: FC<{ car: Car }> = ({ car }) => {
             }}
           ></span>
         </Typography>
-        <Typography sx={{ fontSize: "14px", color: "white", opacity: 0.9 }}>
+        <Typography
+          sx={{ fontSize: "14px", color: "white", mb: 2, opacity: 0.9 }}
+        >
           {car.description}
         </Typography>
+        {data ? data : null}
         <Carousel
           images={car.images.map((el) => el.url)}
           open={value}

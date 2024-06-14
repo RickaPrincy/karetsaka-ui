@@ -27,9 +27,8 @@ export const Carousel = ({
       <DialogContent sx={{ width: "100%" }}>
         <Slider {...SETTINGS}>
           {images.map((img, index) => (
-            <div style={{ width: "100%", height: "700px" }}>
+            <div key={index} style={{ width: "100%", height: "700px" }}>
               <Image
-                key={index}
                 src={img}
                 alt={`slide-${index}`}
                 width={500}
