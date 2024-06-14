@@ -7,10 +7,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { FlexBox } from "@/common/components/box";
-import { PALETTE_COLORS } from "@/common/utils/palette-colors";
 import { CarList, SearchComponent } from "./components";
 import { CarBrandC } from "@/operations/car-brands/components";
 import { ContactForm } from "../contact/components";
+import { PALETTE_COLORS } from "@/common/utils/palette-colors";
 import { carBrandProvider } from "@/providers/car-brand-provider";
 import golf from "@/assets/images/golf.png";
 
