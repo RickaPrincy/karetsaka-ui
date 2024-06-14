@@ -22,6 +22,8 @@ const getMotorColorr = (value: CarMotorTypeEnum) => {
 
 //TODO: fix image on car
 export const CarCard: FC<{ car: Car } & BoxProps> = ({ car, ...boxProps }) => {
+  const showImageUrl = car.images.length > 0 ? car.images[0].url : defaultImage;
+
   return (
     <Box
       sx={{
@@ -36,7 +38,7 @@ export const CarCard: FC<{ car: Car } & BoxProps> = ({ car, ...boxProps }) => {
       }}
       {...boxProps}
     >
-      <Image src={defaultImage} width={250} height={250} alt={car.name} />
+      <Image src={showImageUrl} width={250} height={250} alt={car.name} />
       <FlexBox sx={{ justifyContent: "space-between" }}>
         <Typography sx={{ color: "white", fontWeight: "bold" }}>
           {car.name}
