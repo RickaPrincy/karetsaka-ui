@@ -8,7 +8,7 @@ export type CarBrandProps = {
   brand: CarBrand;
 } & Omit<BoxProps, "children">;
 
-export const CarBrandC: FC<CarBrandProps> = ({ brand, ...boxProps }) => {
+export const CarBrandC: FC<CarBrandProps> = ({ brand, sx, ...boxProps }) => {
   return (
     <FlexBox
       sx={{
@@ -22,6 +22,7 @@ export const CarBrandC: FC<CarBrandProps> = ({ brand, ...boxProps }) => {
         "&:hover": {
           boxShadow: "0px 0px 1px white",
         },
+        ...sx,
       }}
       {...boxProps}
     >

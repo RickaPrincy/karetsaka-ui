@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { Box, Typography, BoxProps } from "@mui/material";
-import { Car, CarMotorTypeEnum } from "@/gen/client";
-import defaultImage from "@/assets/images/golf.png";
 import Image from "next/image";
+
+import { Car, CarMotorTypeEnum } from "@/gen/client";
 import { FlexBox } from "@/common/components/box";
 import { renderMoney } from "@/common/utils/typo";
+import defaultImage from "@/assets/images/golf.png";
 
 const getMotorColorr = (value: CarMotorTypeEnum) => {
   switch (value) {
@@ -20,7 +21,6 @@ const getMotorColorr = (value: CarMotorTypeEnum) => {
 };
 
 //TODO: fix image on car
-//TODO: change this
 export const CarCard: FC<{ car: Car } & BoxProps> = ({ car, ...boxProps }) => {
   return (
     <Box

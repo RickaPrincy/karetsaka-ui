@@ -23,7 +23,7 @@ export const CarList = () => {
   return (
     <FlexBox sx={{ width: "90%", gap: 5, mt: 5, flexWrap: "wrap" }}>
       {cars.map((el) => (
-        <Link key={el.id} href={`/client/${el.id}`}>
+        <Link key={el.id} href={`/cars/${el.id}`}>
           <CarCard car={el} />
         </Link>
       ))}
