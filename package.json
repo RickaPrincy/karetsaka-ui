@@ -15,7 +15,7 @@
     "@hookform/resolvers": "^3.5.0",
     "@mui/x-date-pickers": "^7.5.0",
     "@types/react-slick": "^0.23.13",
-    "axios": "^1.7.2",
+    "axios": "^1.7.4",
     "dayjs": "^1.11.11",
     "firebase": "^10.12.2",
     "generate-password-browser": "^1.1.0",
